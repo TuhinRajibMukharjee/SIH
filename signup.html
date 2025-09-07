@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Create your Tourism Explorer account to save favorite destinations, get personalized travel recommendations, and access exclusive member benefits.">
+    <meta name="keywords" content="sign up, register, create account, tourism explorer, travel account, new user">
+    <meta name="author" content="Tourism Explorer">
+    <meta name="robots" content="index, follow">
+    
+    <title>Sign Up - Tourism Explorer | Create Your Travel Account</title>
+    
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        .auth-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2rem 0;
+        }
+        
+        .auth-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 100%;
+            max-width: 1000px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 700px;
+        }
+        
+        .auth-image {
+            background: url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80') center/cover;
+            position: relative;
+        }
+        
+        .auth-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(44, 90, 160, 0.8), rgba(255, 107, 107, 0.8));
+        }
+        
+        .auth-image-content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 2rem;
+        }
+        
+        .auth-image-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .auth-image-content p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+        
+        .benefits-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 2rem;
+        }
+        
+        .benefits-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+        }
+        
+        .auth-form-section {
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow-y: auto;
+            max-height: 700px;
+        }
+        
+        .auth-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .auth-header h1 {
+            color: #2c5aa0;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .auth-header p {
+            color: #666;
+            font-size: 1rem;
+        }
+        
+        .auth-form {
+            width: 100%;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            font-family: inherit;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #2c5aa0;
+        }
+        
+        .password-strength {
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+        }
+        
+        .strength-weak { color: #f44336; }
+        .strength-medium { color: #ff9800; }
+        .strength-strong { color: #4caf50; }
+        
+        .terms-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .terms-checkbox input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+            margin-top: 0.2rem;
+        }
+        
+        .terms-checkbox label {
+            font-size: 0.9rem;
+            line-height: 1.4;
+            color: #666;
+        }
+        
+        .terms-checkbox a {
+            color: #2c5aa0;
+            text-decoration: none;
+        }
+        
+        .terms-checkbox a:hover {
+            text-decoration: underline;
+        }
+        
+        .auth-btn {
+            width: 100%;
+            background: #2c5aa0;
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 1.5rem;
+        }
+        
+        .auth-btn:hover {
+            background: #1e3d72;
+            transform: translateY(-2px);
+        }
+        
+        .auth-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .divider {
+            text-align: center;
+            margin: 1.5rem 0;
+            position: relative;
+            color: #666;
+        }
+        
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #e0e0e0;
+        }
+        
+        .divider span {
+            background: white;
+            padding: 0 1rem;
+        }
+        
+        .social-login {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .social-btn {
+            flex: 1;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .social-btn:hover {
+            border-color: #2c5aa0;
+            transform: translateY(-2px);
+        }
+        
+        .auth-footer {
+            text-align: center;
+            color: #666;
+        }
+        
+        .auth-footer a {
+            color: #2c5aa0;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .auth-footer a:hover {
+            color: #1e3d72;
+        }
+        
+        .back-to-home {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: opacity 0.3s ease;
+        }
+        
+        .back-to-home:hover {
+            opacity: 0.8;
+        }
+        
+        .error-message {
+            background: #ffebee;
+            color: #c62828;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #c62828;
+            display: none;
+        }
+        
+        .success-message {
+            background: #e8f5e8;
+            color: #2e7d32;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #2e7d32;
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .auth-container {
+                grid-template-columns: 1fr;
+                margin: 1rem;
+                max-width: none;
+            }
+            
+            .auth-image {
+                display: none;
+            }
+            
+            .auth-form-section {
+                padding: 2rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .back-to-home {
+                position: static;
+                color: #2c5aa0;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-page">
+        <a href="index.html" class="back-to-home">
+            ← Back to Home
+        </a>
+        
+        <div class="auth-container">
+            <div class="auth-image">
+                <div class="auth-image-content">
+                    <h2>Join Tourism Explorer!</h2>
+                    <p>Create your account and unlock amazing travel experiences</p>
+                    <ul class="benefits-list">
+                        <li>✓ Save favorite destinations</li>
+                        <li>✓ Get personalized recommendations</li>
+                        <li>✓ Access exclusive deals</li>
+                        <li>✓ Track your travel history</li>
+                        <li>✓ Join our travel community</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="auth-form-section">
+                <div class="auth-header">
+                    <h1>Create Account</h1>
+                    <p>Start your travel journey today</p>
+                </div>
+                
+                <div class="error-message" id="error-message"></div>
+                <div class="success-message" id="success-message"></div>
+                
+                <form class="auth-form" id="signup-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name *</label>
+                            <input type="text" id="firstName" name="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name *</label>
+                            <input type="text" id="lastName" name="lastName" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Password *</label>
+                        <input type="password" id="password" name="password" required>
+                        <div class="password-strength" id="password-strength"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password *</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="birthDate">Date of Birth</label>
+                        <input type="date" id="birthDate" name="birthDate">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="country">Country</label>
+                        <select id="country" name="country">
+                            <option value="">Select your country</option>
+                            <option value="US">United States</option>
+                            <option value="CA">Canada</option>
+                            <option value="UK">United Kingdom</option>
+                            <option value="AU">Australia</option>
+                            <option value="DE">Germany</option>
+                            <option value="FR">France</option>
+                            <option value="IT">Italy</option>
+                            <option value="ES">Spain</option>
+                            <option value="JP">Japan</option>
+                            <option value="IN">India</option>
+                            <option value="BR">Brazil</option>
+                            <option value="MX">Mexico</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="travelInterests">Travel Interests</label>
+                        <select id="travelInterests" name="travelInterests">
+                            <option value="">Select your primary interest</option>
+                            <option value="beach">Beach & Relaxation</option>
+                            <option value="adventure">Adventure & Sports</option>
+                            <option value="culture">Culture & History</option>
+                            <option value="nature">Nature & Wildlife</option>
+                            <option value="food">Food & Culinary</option>
+                            <option value="luxury">Luxury Travel</option>
+                            <option value="budget">Budget Travel</option>
+                            <option value="family">Family Travel</option>
+                            <option value="solo">Solo Travel</option>
+                        </select>
+                    </div>
+                    
+                    <div class="terms-checkbox">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <label for="terms">
+                            I agree to the <a href="#" onclick="showTerms()">Terms of Service</a> and <a href="#" onclick="showPrivacy()">Privacy Policy</a> *
+                        </label>
+                    </div>
+                    
+                    <div class="terms-checkbox">
+                        <input type="checkbox" id="newsletter" name="newsletter">
+                        <label for="newsletter">
+                            Subscribe to our newsletter for travel tips and exclusive offers
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="auth-btn" id="signup-btn">Create Account</button>
+                </form>
+                
+                <div class="divider">
+                    <span>or sign up with</span>
+                </div>
+                
+                <div class="social-login">
+                    <button class="social-btn" onclick="socialSignup('google')">
+                        <span>🔍</span> Google
+                    </button>
+                    <button class="social-btn" onclick="socialSignup('facebook')">
+                        <span>📘</span> Facebook
+                    </button>
+                </div>
+                
+                <div class="auth-footer">
+                    <p>Already have an account? <a href="signin.html">Sign in here</a></p>
+                    <p>Are you a travel guide? <a href="guide-registration.html">Register as a guide</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Sign-up specific functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            setupSignUpForm();
+            setupPasswordStrength();
+        });
+        
+        function setupSignUpForm() {
+            const form = document.getElementById('signup-form');
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(form);
+                const data = Object.fromEntries(formData);
+                
+                // Validate form
+                if (!validateSignUpForm(data)) {
+                    return;
+                }
+                
+                // Simulate sign-up process
+                signUpUser(data);
+            });
+        }
+        
+        function setupPasswordStrength() {
+            const passwordInput = document.getElementById('password');
+            const strengthDiv = document.getElementById('password-strength');
+            
+            passwordInput.addEventListener('input', function() {
+                const password = this.value;
+                const strength = checkPasswordStrength(password);
+                
+                strengthDiv.textContent = strength.text;
+                strengthDiv.className = `password-strength strength-${strength.level}`;
+            });
+        }
+        
+        function checkPasswordStrength(password) {
+            let score = 0;
+            let feedback = [];
+            
+            if (password.length >= 8) score++;
+            else feedback.push('at least 8 characters');
+            
+            if (/[a-z]/.test(password)) score++;
+            else feedback.push('lowercase letters');
+            
+            if (/[A-Z]/.test(password)) score++;
+            else feedback.push('uppercase letters');
+            
+            if (/[0-9]/.test(password)) score++;
+            else feedback.push('numbers');
+            
+            if (/[^A-Za-z0-9]/.test(password)) score++;
+            else feedback.push('special characters');
+            
+            if (score < 2) {
+                return { level: 'weak', text: `Weak password. Include ${feedback.join(', ')}.` };
+            } else if (score < 4) {
+                return { level: 'medium', text: 'Medium strength password.' };
+            } else {
+                return { level: 'strong', text: 'Strong password!' };
+            }
+        }
+        
+        function validateSignUpForm(data) {
+            const errorMessage = document.getElementById('error-message');
+            
+            // Required fields
+            const requiredFields = ['firstName', 'lastName', 'email', 'password', 'confirmPassword'];
+            for (let field of requiredFields) {
+                if (!data[field] || !data[field].trim()) {
+                    showError(`${field.replace(/([A-Z])/g, ' $1').toLowerCase()} is required.`);
+                    return false;
+                }
+            }
+            
+            // Email validation
+            if (!isValidEmail(data.email)) {
+                showError('Please enter a valid email address.');
+                return false;
+            }
+            
+            // Password validation
+            if (data.password.length < 6) {
+                showError('Password must be at least 6 characters long.');
+                return false;
+            }
+            
+            if (data.password !== data.confirmPassword) {
+                showError('Passwords do not match.');
+                return false;
+            }
+            
+            // Terms agreement
+            if (!data.terms) {
+                showError('You must agree to the Terms of Service and Privacy Policy.');
+                return false;
+            }
+            
+            return true;
+        }
+        
+        function signUpUser(data) {
+            const signupBtn = document.getElementById('signup-btn');
+            const originalText = signupBtn.textContent;
+            
+            signupBtn.textContent = 'Creating Account...';
+            signupBtn.disabled = true;
+            
+            // Simulate API call
+            setTimeout(() => {
+                // Store user data
+                const userData = {
+                    firstName: data.firstName,
+                    lastName: data.lastName,
+                    email: data.email,
+                    phone: data.phone,
+                    birthDate: data.birthDate,
+                    country: data.country,
+                    travelInterests: data.travelInterests,
+                    newsletter: data.newsletter === 'on',
+                    signupTime: new Date().toISOString()
+                };
+                
+                localStorage.setItem('user', JSON.stringify(userData));
+                
+                showSuccess('Account created successfully! Welcome to Tourism Explorer!');
+                
+                // Redirect to home page
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 2000);
+                
+                signupBtn.textContent = originalText;
+                signupBtn.disabled = false;
+            }, 2000);
+        }
+        
+        function showError(message) {
+            const errorDiv = document.getElementById('error-message');
+            const successDiv = document.getElementById('success-message');
+            
+            successDiv.style.display = 'none';
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                errorDiv.style.display = 'none';
+            }, 5000);
+        }
+        
+        function showSuccess(message) {
+            const errorDiv = document.getElementById('error-message');
+            const successDiv = document.getElementById('success-message');
+            
+            errorDiv.style.display = 'none';
+            successDiv.textContent = message;
+            successDiv.style.display = 'block';
+        }
+        
+        function showTerms() {
+            alert('Terms of Service: By using Tourism Explorer, you agree to our terms and conditions. This includes respecting local laws, being responsible for your travel decisions, and following our community guidelines.');
+        }
+        
+        function showPrivacy() {
+            alert('Privacy Policy: We respect your privacy and protect your personal information. We only use your data to provide better travel services and will never share it with third parties without your consent.');
+        }
+        
+        function socialSignup(provider) {
+            alert(`${provider.charAt(0).toUpperCase() + provider.slice(1)} sign-up integration coming soon!`);
+        }
+    </script>
+</body>
+</html>

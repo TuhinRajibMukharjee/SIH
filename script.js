@@ -4,6 +4,7 @@
 let currentDestinations = [];
 let displayedDestinations = 6;
 let allDestinations = [];
+let currentUser = null;
 
 // Sample destinations data
 const destinationsData = [
@@ -125,6 +126,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function initializeWebsite() {
+    checkUserAuthentication();
     setupNavigation();
     loadDestinations();
     setupSearch();
@@ -132,6 +134,7 @@ function initializeWebsite() {
     setupNewsletter();
     setupScrollAnimations();
     setupImageLazyLoading();
+    setupQuickGuideForm();
 }
 
 // Navigation functionality
@@ -585,6 +588,102 @@ function openReviews() {
     alert('Reviews and ratings feature coming soon! This will show authentic reviews from fellow travelers.');
 }
 
+// Guide signup modal functions
+function openGuideSignup() {
+    const modal = document.getElementById('guide-signup-modal');
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+function closeGuideSignup() {
+    const modal = document.getElementById('guide-signup-modal');
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+// Quick guide form submission
+function setupQuickGuideForm() {
+    const form = document.getElementById('quick-guide-form');
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+            
+            // Validate form
+            if (!validateQuickGuideForm(data)) {
+                return;
+            }
+            
+            // Submit application
+            submitQuickGuideApplication(data);
+        });
+    }
+}
+
+function validateQuickGuideForm(data) {
+    const requiredFields = ['firstName', 'lastName', 'email', 'phone', 'location', 'experience', 'specialty', 'languages', 'description'];
+    
+    for (let field of requiredFields) {
+        if (!data[field] || !data[field].trim()) {
+            alert(`${field.replace(/([A-Z])/g, ' $1').toLowerCase()} is required.`);
+            return false;
+        }
+    }
+    
+    if (!isValidEmail(data.email)) {
+        alert('Please enter a valid email address.');
+        return false;
+    }
+    
+    if (!data.terms) {
+        alert('You must agree to the Terms of Service and Privacy Policy.');
+        return false;
+    }
+    
+    return true;
+}
+
+function submitQuickGuideApplication(data) {
+    const form = document.getElementById('quick-guide-form');
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    
+    submitBtn.textContent = 'Submitting...';
+    submitBtn.disabled = true;
+    
+    // Simulate API call
+    setTimeout(() => {
+        // Store application data
+        const applicationData = {
+            ...data,
+            applicationDate: new Date().toISOString(),
+            status: 'pending',
+            type: 'quick'
+        };
+        
+        localStorage.setItem('quickGuideApplication', JSON.stringify(applicationData));
+        
+        alert('Application submitted successfully! We will review your application and contact you within 3-5 business days.');
+        
+        // Close modal and reset form
+        closeGuideSignup();
+        document.getElementById('quick-guide-form').reset();
+        
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+    }, 2000);
+}
+
+function showGuideTerms() {
+    alert('Guide Terms of Service: As a guide, you agree to provide safe, accurate, and professional services. You are responsible for your own insurance, taxes, and compliance with local laws. Tourism Explorer takes a commission from bookings and provides platform support.');
+}
+
+function showGuidePrivacy() {
+    alert('Guide Privacy Policy: We protect your personal information and only share it as necessary for verification and platform operations. Your contact information will be shared with guests only after confirmed bookings.');
+}
+
 // Contact form
 function setupContactForm() {
     const form = document.getElementById('contact-form');
@@ -718,6 +817,63 @@ window.addEventListener('load', function() {
 window.addEventListener('error', function(e) {
     console.error('An error occurred:', e.error);
 });
+
+// Authentication functions
+function checkUserAuthentication() {
+    const userData = localStorage.getItem('user');
+    if (userData) {
+        currentUser = JSON.parse(userData);
+        updateNavigationForLoggedInUser();
+    }
+}
+
+function updateNavigationForLoggedInUser() {
+    const navMenu = document.getElementById('nav-menu');
+    if (navMenu && currentUser) {
+        // Remove sign in/sign up links
+        const signInLink = navMenu.querySelector('a[href="signin.html"]');
+        const signUpLink = navMenu.querySelector('a[href="signup.html"]');
+        
+        if (signInLink) signInLink.parentElement.remove();
+        if (signUpLink) signUpLink.parentElement.remove();
+        
+        // Add user menu
+        const userMenuItem = document.createElement('li');
+        userMenuItem.className = 'nav-item';
+        userMenuItem.innerHTML = `
+            <div class="user-menu">
+                <span class="user-name">👤 ${currentUser.firstName || currentUser.name || 'User'}</span>
+                <div class="user-dropdown">
+                    <a href="#" onclick="showUserProfile()">Profile</a>
+                    <a href="#" onclick="showUserBookings()">My Bookings</a>
+                    <a href="#" onclick="showUserFavorites()">Favorites</a>
+                    <a href="#" onclick="signOut()">Sign Out</a>
+                </div>
+            </div>
+        `;
+        navMenu.appendChild(userMenuItem);
+    }
+}
+
+function signOut() {
+    localStorage.removeItem('user');
+    currentUser = null;
+    location.reload();
+}
+
+function showUserProfile() {
+    if (currentUser) {
+        alert(`User Profile:\nName: ${currentUser.firstName || currentUser.name}\nEmail: ${currentUser.email}\nMember since: ${new Date(currentUser.signupTime || currentUser.loginTime).toLocaleDateString()}`);
+    }
+}
+
+function showUserBookings() {
+    alert('My Bookings feature coming soon! This will show your travel bookings and reservations.');
+}
+
+function showUserFavorites() {
+    alert('Favorites feature coming soon! This will show your saved destinations and wishlist.');
+}
 
 // Service Worker registration for PWA capabilities (optional)
 if ('serviceWorker' in navigator) {
