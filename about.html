@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn about Tourism Explorer - your trusted travel companion. Discover our mission, team, and commitment to making your travel dreams come true.">
+    <meta name="keywords" content="about us, travel company, tourism, travel agency, travel services, team">
+    <meta name="author" content="Tourism Explorer">
+    <meta name="robots" content="index, follow">
+    
+    <title>About Us - Tourism Explorer | Your Trusted Travel Companion</title>
+    
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        .about-page {
+            padding-top: 100px;
+        }
+        
+        .hero-about {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .hero-about h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-about p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        .mission-section {
+            padding: 5rem 0;
+            background: white;
+        }
+        
+        .mission-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .mission-text h2 {
+            font-size: 2.5rem;
+            color: #2c5aa0;
+            margin-bottom: 1.5rem;
+        }
+        
+        .mission-text p {
+            font-size: 1.1rem;
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        
+        .mission-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .values-section {
+            padding: 5rem 0;
+            background: #f8f9fa;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .value-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .value-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .value-card h3 {
+            color: #2c5aa0;
+            margin-bottom: 1rem;
+        }
+        
+        .team-section {
+            padding: 5rem 0;
+            background: white;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .team-member {
+            text-align: center;
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-5px);
+        }
+        
+        .team-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1rem;
+            display: block;
+        }
+        
+        .team-member h4 {
+            color: #2c5aa0;
+            margin-bottom: 0.5rem;
+        }
+        
+        .team-member .role {
+            color: #ff6b6b;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .stats-section {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #2c5aa0 0%, #1e3d72 100%);
+            color: white;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+        
+        .stat-item h3 {
+            font-size: 3rem;
+            color: #ffd700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-item p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .cta-section {
+            padding: 5rem 0;
+            background: #f8f9fa;
+            text-align: center;
+        }
+        
+        .cta-content h2 {
+            font-size: 2.5rem;
+            color: #2c5aa0;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-content p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .cta-btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .cta-btn.primary {
+            background: #2c5aa0;
+            color: white;
+        }
+        
+        .cta-btn.primary:hover {
+            background: #1e3d72;
+            transform: translateY(-2px);
+        }
+        
+        .cta-btn.secondary {
+            background: #ff6b6b;
+            color: white;
+        }
+        
+        .cta-btn.secondary:hover {
+            background: #ff5252;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>🌍 Tourism Explorer</h2>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="destinations.html" class="nav-link">Destinations</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link active">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- About Page Content -->
+    <div class="about-page">
+        <!-- Hero Section -->
+        <section class="hero-about">
+            <div class="container">
+                <h1>About Tourism Explorer</h1>
+                <p>We're passionate about making your travel dreams come true. With over a decade of experience, we've helped thousands of travelers discover amazing destinations around the world.</p>
+            </div>
+        </section>
+
+        <!-- Mission Section -->
+        <section class="mission-section">
+            <div class="container">
+                <div class="mission-content">
+                    <div class="mission-text">
+                        <h2>Our Mission</h2>
+                        <p>At Tourism Explorer, we believe that travel has the power to transform lives, broaden perspectives, and create lasting memories. Our mission is to make world-class travel accessible, enjoyable, and unforgettable for everyone.</p>
+                        <p>We're committed to providing exceptional service, expert guidance, and personalized experiences that exceed your expectations. Whether you're planning a romantic getaway, family vacation, or solo adventure, we're here to make it extraordinary.</p>
+                        <p>Our team of travel experts works tirelessly to curate the best destinations, secure the best deals, and ensure every detail of your journey is perfect.</p>
+                    </div>
+                    <div class="mission-image">
+                        <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Travel mission" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Values Section -->
+        <section class="values-section">
+            <div class="container">
+                <h2 class="section-title">Our Values</h2>
+                <p class="section-subtitle">The principles that guide everything we do</p>
+                
+                <div class="values-grid">
+                    <div class="value-card">
+                        <div class="value-icon">🌟</div>
+                        <h3>Excellence</h3>
+                        <p>We strive for excellence in every aspect of our service, from initial consultation to post-trip follow-up. Your satisfaction is our top priority.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">🤝</div>
+                        <h3>Trust</h3>
+                        <p>We build lasting relationships based on trust, transparency, and reliability. You can count on us to deliver what we promise.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">🌍</div>
+                        <h3>Sustainability</h3>
+                        <p>We're committed to responsible tourism that benefits local communities and preserves the beauty of our planet for future generations.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">💡</div>
+                        <h3>Innovation</h3>
+                        <p>We continuously innovate to provide cutting-edge travel solutions and stay ahead of industry trends and customer needs.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">❤️</div>
+                        <h3>Passion</h3>
+                        <p>Our love for travel and exploration drives everything we do. We're passionate about sharing the world's wonders with you.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">🎯</div>
+                        <h3>Personalization</h3>
+                        <p>Every traveler is unique, and so should be their journey. We create customized experiences tailored to your preferences and dreams.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section class="team-section">
+            <div class="container">
+                <h2 class="section-title">Meet Our Team</h2>
+                <p class="section-subtitle">The passionate professionals behind your perfect trip</p>
+                
+                <div class="team-grid">
+                    <div class="team-member">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Sarah Johnson" class="team-photo">
+                        <h4>Sarah Johnson</h4>
+                        <div class="role">CEO & Founder</div>
+                        <p>With 15 years in the travel industry, Sarah founded Tourism Explorer to make world-class travel accessible to everyone.</p>
+                    </div>
+                    
+                    <div class="team-member">
+                        <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Michael Chen" class="team-photo">
+                        <h4>Michael Chen</h4>
+                        <div class="role">Head of Operations</div>
+                        <p>Michael ensures every detail of your journey is perfect, from booking to arrival and beyond.</p>
+                    </div>
+                    
+                    <div class="team-member">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Emily Rodriguez" class="team-photo">
+                        <h4>Emily Rodriguez</h4>
+                        <div class="role">Travel Specialist</div>
+                        <p>Emily's expertise in European destinations and cultural experiences helps create unforgettable journeys.</p>
+                    </div>
+                    
+                    <div class="team-member">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="David Thompson" class="team-photo">
+                        <h4>David Thompson</h4>
+                        <div class="role">Adventure Coordinator</div>
+                        <p>David specializes in adventure travel and outdoor experiences, from hiking to extreme sports.</p>
+                    </div>
+                    
+                    <div class="team-member">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Lisa Park" class="team-photo">
+                        <h4>Lisa Park</h4>
+                        <div class="role">Customer Success Manager</div>
+                        <p>Lisa ensures every customer has an exceptional experience and provides 24/7 support during travels.</p>
+                    </div>
+                    
+                    <div class="team-member">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="James Wilson" class="team-photo">
+                        <h4>James Wilson</h4>
+                        <div class="role">Technology Director</div>
+                        <p>James leads our digital innovation, ensuring our platform provides the best user experience possible.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="container">
+                <h2 class="section-title" style="color: white;">Our Impact</h2>
+                <p class="section-subtitle" style="color: rgba(255,255,255,0.9);">Numbers that speak to our success</p>
+                
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <h3>50,000+</h3>
+                        <p>Happy Travelers</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>500+</h3>
+                        <p>Destinations</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>100+</h3>
+                        <p>Countries</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>15</h3>
+                        <p>Years Experience</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>98%</h3>
+                        <p>Customer Satisfaction</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>24/7</h3>
+                        <p>Support Available</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Ready to Start Your Journey?</h2>
+                    <p>Join thousands of satisfied travelers who have discovered amazing destinations with Tourism Explorer. Let us help you create memories that will last a lifetime.</p>
+                    <div class="cta-buttons">
+                        <a href="destinations.html" class="cta-btn primary">Explore Destinations</a>
+                        <a href="contact.html" class="cta-btn secondary">Get in Touch</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Tourism Explorer</h3>
+                    <p>Your gateway to amazing destinations around the world.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="destinations.html">Destinations</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#">Travel Planning</a></li>
+                        <li><a href="#">Hotel Booking</a></li>
+                        <li><a href="#">Tour Packages</a></li>
+                        <li><a href="#">Travel Insurance</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe to get travel tips and exclusive offers</p>
+                    <div class="newsletter-form">
+                        <input type="email" placeholder="Your email" id="newsletter-email">
+                        <button onclick="subscribeNewsletter()">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Tourism Explorer. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

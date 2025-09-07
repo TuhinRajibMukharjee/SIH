@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact Tourism Explorer for all your travel needs. Get in touch with our travel experts for personalized assistance, bookings, and travel advice.">
+    <meta name="keywords" content="contact us, travel support, travel booking, travel assistance, customer service">
+    <meta name="author" content="Tourism Explorer">
+    <meta name="robots" content="index, follow">
+    
+    <title>Contact Us - Tourism Explorer | Get in Touch with Travel Experts</title>
+    
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        .contact-page {
+            padding-top: 100px;
+        }
+        
+        .contact-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .contact-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        .contact-main {
+            padding: 5rem 0;
+            background: white;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+        
+        .contact-info-section h2 {
+            color: #2c5aa0;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+        
+        .contact-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+        
+        .contact-method:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .contact-method-icon {
+            width: 60px;
+            height: 60px;
+            background: #2c5aa0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .contact-method-info h4 {
+            color: #2c5aa0;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .contact-method-info p {
+            color: #666;
+            margin-bottom: 0.3rem;
+        }
+        
+        .contact-method-info .hours {
+            color: #999;
+            font-size: 0.9rem;
+        }
+        
+        .contact-form-section {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+        }
+        
+        .contact-form-section h2 {
+            color: #2c5aa0;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            font-family: inherit;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #2c5aa0;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .submit-btn {
+            background: #2c5aa0;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .submit-btn:hover {
+            background: #1e3d72;
+            transform: translateY(-2px);
+        }
+        
+        .submit-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .faq-section {
+            padding: 5rem 0;
+            background: #f8f9fa;
+        }
+        
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .faq-item {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .faq-question {
+            padding: 1.5rem;
+            background: #2c5aa0;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            background: #1e3d72;
+        }
+        
+        .faq-answer {
+            padding: 1.5rem;
+            color: #666;
+            line-height: 1.6;
+            display: none;
+        }
+        
+        .faq-answer.active {
+            display: block;
+        }
+        
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+        
+        .office-hours {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .office-hours h3 {
+            color: #2c5aa0;
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+        }
+        
+        .hours-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .hours-item {
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .hours-item h4 {
+            color: #2c5aa0;
+            margin-bottom: 0.5rem;
+        }
+        
+        .hours-item p {
+            color: #666;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>🌍 Tourism Explorer</h2>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="destinations.html" class="nav-link">Destinations</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link active">Contact</a>
+                </li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contact Page Content -->
+    <div class="contact-page">
+        <!-- Hero Section -->
+        <section class="contact-hero">
+            <div class="container">
+                <h1>Get in Touch</h1>
+                <p>We're here to help you plan your perfect trip. Contact our travel experts for personalized assistance, bookings, and travel advice.</p>
+            </div>
+        </section>
+
+        <!-- Main Contact Section -->
+        <section class="contact-main">
+            <div class="container">
+                <div class="contact-grid">
+                    <!-- Contact Information -->
+                    <div class="contact-info-section">
+                        <h2>Contact Information</h2>
+                        <div class="contact-methods">
+                            <div class="contact-method">
+                                <div class="contact-method-icon">📧</div>
+                                <div class="contact-method-info">
+                                    <h4>Email Us</h4>
+                                    <p>info@tourism-explorer.com</p>
+                                    <p>support@tourism-explorer.com</p>
+                                    <div class="hours">Response within 2 hours</div>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-method">
+                                <div class="contact-method-icon">📞</div>
+                                <div class="contact-method-info">
+                                    <h4>Call Us</h4>
+                                    <p>+1 (555) 123-4567</p>
+                                    <p>+1 (555) 987-6543</p>
+                                    <div class="hours">Mon-Fri: 9AM-6PM EST</div>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-method">
+                                <div class="contact-method-icon">💬</div>
+                                <div class="contact-method-info">
+                                    <h4>Live Chat</h4>
+                                    <p>Available on our website</p>
+                                    <p>Instant support</p>
+                                    <div class="hours">24/7 availability</div>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-method">
+                                <div class="contact-method-icon">📍</div>
+                                <div class="contact-method-info">
+                                    <h4>Visit Us</h4>
+                                    <p>123 Travel Street</p>
+                                    <p>Travel City, TC 12345</p>
+                                    <div class="hours">Mon-Fri: 9AM-5PM</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Contact Form -->
+                    <div class="contact-form-section">
+                        <h2>Send us a Message</h2>
+                        <form id="contact-form" class="contact-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="firstName">First Name *</label>
+                                    <input type="text" id="firstName" name="firstName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">Last Name *</label>
+                                    <input type="text" id="lastName" name="lastName" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="email">Email Address *</label>
+                                    <input type="email" id="email" name="email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Phone Number</label>
+                                    <input type="tel" id="phone" name="phone">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="inquiryType">Type of Inquiry *</label>
+                                <select id="inquiryType" name="inquiryType" required>
+                                    <option value="">Select an option</option>
+                                    <option value="general">General Information</option>
+                                    <option value="booking">Booking Assistance</option>
+                                    <option value="custom">Custom Travel Planning</option>
+                                    <option value="support">Customer Support</option>
+                                    <option value="partnership">Partnership</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="destination">Destination of Interest</label>
+                                <input type="text" id="destination" name="destination" placeholder="e.g., Santorini, Japan, Bali">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="travelDates">Travel Dates</label>
+                                <input type="text" id="travelDates" name="travelDates" placeholder="e.g., March 15-25, 2024">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="budget">Budget Range</label>
+                                <select id="budget" name="budget">
+                                    <option value="">Select budget range</option>
+                                    <option value="under-1000">Under $1,000</option>
+                                    <option value="1000-2000">$1,000 - $2,000</option>
+                                    <option value="2000-5000">$2,000 - $5,000</option>
+                                    <option value="5000-10000">$5,000 - $10,000</option>
+                                    <option value="over-10000">Over $10,000</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message">Message *</label>
+                                <textarea id="message" name="message" placeholder="Tell us about your travel dreams and how we can help..." required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="submit-btn">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <div class="container">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <p class="section-subtitle">Quick answers to common questions</p>
+                
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span>How far in advance should I book my trip?</span>
+                            <span class="faq-icon">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            We recommend booking at least 2-3 months in advance for international trips and 1-2 months for domestic travel. This ensures better availability and pricing options.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span>Do you offer travel insurance?</span>
+                            <span class="faq-icon">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            Yes, we offer comprehensive travel insurance options to protect your investment. Our team can help you choose the right coverage for your trip.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span>Can you help with visa applications?</span>
+                            <span class="faq-icon">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            Absolutely! We provide guidance on visa requirements and can connect you with trusted visa processing services to make the application process smooth.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span>What if I need to cancel my trip?</span>
+                            <span class="faq-icon">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            Our cancellation policies vary by booking type. We'll work with you to minimize cancellation fees and explore options like rescheduling when possible.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span>Do you offer group travel discounts?</span>
+                            <span class="faq-icon">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            Yes! We offer special rates for groups of 6 or more people. Contact us for a customized quote and group booking assistance.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span>Is 24/7 support available during my trip?</span>
+                            <span class="faq-icon">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            Yes, we provide 24/7 emergency support during your travels. Our team is always available to assist with any issues that may arise.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Office Hours -->
+        <section class="contact-main">
+            <div class="container">
+                <div class="office-hours">
+                    <h3>Office Hours</h3>
+                    <div class="hours-grid">
+                        <div class="hours-item">
+                            <h4>Monday - Friday</h4>
+                            <p>9:00 AM - 6:00 PM EST</p>
+                        </div>
+                        <div class="hours-item">
+                            <h4>Saturday</h4>
+                            <p>10:00 AM - 4:00 PM EST</p>
+                        </div>
+                        <div class="hours-item">
+                            <h4>Sunday</h4>
+                            <p>Emergency Support Only</p>
+                        </div>
+                        <div class="hours-item">
+                            <h4>Holidays</h4>
+                            <p>Emergency Support Available</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Tourism Explorer</h3>
+                    <p>Your gateway to amazing destinations around the world.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="destinations.html">Destinations</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#">Travel Planning</a></li>
+                        <li><a href="#">Hotel Booking</a></li>
+                        <li><a href="#">Tour Packages</a></li>
+                        <li><a href="#">Travel Insurance</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe to get travel tips and exclusive offers</p>
+                    <div class="newsletter-form">
+                        <input type="email" placeholder="Your email" id="newsletter-email">
+                        <button onclick="subscribeNewsletter()">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Tourism Explorer. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Contact page specific functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            setupNavigation();
+            setupContactForm();
+            setupFAQ();
+        });
+        
+        function setupContactForm() {
+            const form = document.getElementById('contact-form');
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(form);
+                const data = Object.fromEntries(formData);
+                
+                // Validate form
+                if (!validateContactForm(data)) {
+                    return;
+                }
+                
+                // Simulate form submission
+                const submitBtn = form.querySelector('.submit-btn');
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = 'Sending...';
+                submitBtn.disabled = true;
+                
+                setTimeout(() => {
+                    alert('Thank you for your message! We will get back to you within 2 hours.');
+                    form.reset();
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }, 2000);
+            });
+        }
+        
+        function validateContactForm(data) {
+            const requiredFields = ['firstName', 'lastName', 'email', 'inquiryType', 'message'];
+            
+            for (let field of requiredFields) {
+                if (!data[field] || data[field].trim() === '') {
+                    alert(`Please fill in the ${field.replace(/([A-Z])/g, ' $1').toLowerCase()} field.`);
+                    return false;
+                }
+            }
+            
+            if (!isValidEmail(data.email)) {
+                alert('Please enter a valid email address.');
+                return false;
+            }
+            
+            return true;
+        }
+        
+        function setupFAQ() {
+            // FAQ functionality is handled by toggleFAQ function
+        }
+        
+        function toggleFAQ(element) {
+            const faqItem = element.parentElement;
+            const answer = faqItem.querySelector('.faq-answer');
+            
+            // Close all other FAQ items
+            document.querySelectorAll('.faq-item').forEach(item => {
+                if (item !== faqItem) {
+                    item.classList.remove('active');
+                    item.querySelector('.faq-answer').classList.remove('active');
+                }
+            });
+            
+            // Toggle current FAQ item
+            faqItem.classList.toggle('active');
+            answer.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover amazing destinations around the world with our comprehensive tourism guide. Find the best places to visit, travel tips, and book your next adventure.">
+    <meta name="keywords" content="tourism, travel, destinations, vacation, holiday, adventure, world travel, travel guide">
+    <meta name="author" content="Tourism Explorer">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Tourism Explorer - Discover Amazing Destinations">
+    <meta property="og:description" content="Your ultimate guide to world travel. Discover breathtaking destinations and plan your perfect vacation.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tourism-explorer.com">
+    <meta property="og:image" content="https://tourism-explorer.com/images/hero-bg.jpg">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Tourism Explorer - Discover Amazing Destinations">
+    <meta name="twitter:description" content="Your ultimate guide to world travel. Discover breathtaking destinations and plan your perfect vacation.">
+    <meta name="twitter:image" content="https://tourism-explorer.com/images/hero-bg.jpg">
+    
+    <title>Tourism Explorer - Discover Amazing Destinations Around the World</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TravelAgency",
+        "name": "Tourism Explorer",
+        "description": "Your ultimate guide to world travel and tourism",
+        "url": "https://tourism-explorer.com",
+        "logo": "https://tourism-explorer.com/images/logo.png",
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+1-555-TOURISM",
+            "contactType": "customer service"
+        },
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "123 Travel Street",
+            "addressLocality": "Travel City",
+            "addressRegion": "TC",
+            "postalCode": "12345",
+            "addressCountry": "US"
+        }
+    }
+    </script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>🌍 Tourism Explorer</h2>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#destinations" class="nav-link">Destinations</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link">Contact</a>
+                </li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Discover Amazing Destinations</h1>
+            <p class="hero-subtitle">Explore the world's most beautiful places and create unforgettable memories</p>
+            <div class="search-container">
+                <input type="text" id="destination-search" placeholder="Search destinations..." class="search-input">
+                <button class="search-btn" onclick="searchDestinations()">Search</button>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <h3>500+</h3>
+                    <p>Destinations</p>
+                </div>
+                <div class="stat">
+                    <h3>50K+</h3>
+                    <p>Happy Travelers</p>
+                </div>
+                <div class="stat">
+                    <h3>100+</h3>
+                    <p>Countries</p>
+                </div>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Beautiful mountain landscape" loading="lazy">
+        </div>
+    </section>
+
+    <!-- Featured Destinations -->
+    <section id="destinations" class="destinations">
+        <div class="container">
+            <h2 class="section-title">Featured Destinations</h2>
+            <p class="section-subtitle">Discover our handpicked selection of amazing places to visit</p>
+            
+            <div class="destinations-grid" id="destinations-grid">
+                <!-- Destinations will be loaded dynamically -->
+            </div>
+            
+            <div class="load-more-container">
+                <button class="load-more-btn" onclick="loadMoreDestinations()">Load More Destinations</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Features -->
+    <section class="interactive-features">
+        <div class="container">
+            <h2 class="section-title">Plan Your Journey</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🗺️</div>
+                    <h3>Interactive Map</h3>
+                    <p>Explore destinations on our interactive world map</p>
+                    <button class="feature-btn" onclick="openMap()">Open Map</button>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📅</div>
+                    <h3>Travel Planner</h3>
+                    <p>Plan your itinerary with our smart travel planner</p>
+                    <button class="feature-btn" onclick="openPlanner()">Start Planning</button>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📸</div>
+                    <h3>Photo Gallery</h3>
+                    <p>Browse stunning photos from around the world</p>
+                    <button class="feature-btn" onclick="openGallery()">View Gallery</button>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">⭐</div>
+                    <h3>Reviews & Ratings</h3>
+                    <p>Read authentic reviews from fellow travelers</p>
+                    <button class="feature-btn" onclick="openReviews()">Read Reviews</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>About Tourism Explorer</h2>
+                    <p>We are passionate about helping travelers discover the world's most incredible destinations. Our mission is to make travel planning easy, enjoyable, and accessible to everyone.</p>
+                    <p>With over 10 years of experience in the tourism industry, we've helped thousands of travelers create unforgettable memories around the globe.</p>
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <span class="feature-check">✓</span>
+                            <span>Expert travel advice</span>
+                        </div>
+                        <div class="about-feature">
+                            <span class="feature-check">✓</span>
+                            <span>24/7 customer support</span>
+                        </div>
+                        <div class="about-feature">
+                            <span class="feature-check">✓</span>
+                            <span>Best price guarantee</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Travel team" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Get in Touch</h2>
+            <p class="section-subtitle">Ready to start your next adventure? Contact us today!</p>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div>
+                            <h4>Email</h4>
+                            <p>info@tourism-explorer.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>+1 (555) 123-4567</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <h4>Address</h4>
+                            <p>123 Travel Street, Travel City, TC 12345</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <form class="contact-form" id="contact-form">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="subject" name="subject" placeholder="Subject" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Tourism Explorer</h3>
+                    <p>Your gateway to amazing destinations around the world.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Twitter">🐦</a>
+                        <a href="#" aria-label="Instagram">📷</a>
+                        <a href="#" aria-label="YouTube">📺</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#destinations">Destinations</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#">Travel Planning</a></li>
+                        <li><a href="#">Hotel Booking</a></li>
+                        <li><a href="#">Tour Packages</a></li>
+                        <li><a href="#">Travel Insurance</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe to get travel tips and exclusive offers</p>
+                    <div class="newsletter-form">
+                        <input type="email" placeholder="Your email" id="newsletter-email">
+                        <button onclick="subscribeNewsletter()">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Tourism Explorer. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>

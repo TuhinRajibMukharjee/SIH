@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore our comprehensive list of amazing travel destinations around the world. Find your perfect vacation spot with detailed information, photos, and travel tips.">
+    <meta name="keywords" content="travel destinations, vacation spots, world travel, tourism, travel guide, places to visit">
+    <meta name="author" content="Tourism Explorer">
+    <meta name="robots" content="index, follow">
+    
+    <title>Destinations - Tourism Explorer | Amazing Places to Visit</title>
+    
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        .destinations-page {
+            padding-top: 100px;
+        }
+        
+        .filter-section {
+            background: #f8f9fa;
+            padding: 2rem 0;
+            margin-bottom: 3rem;
+        }
+        
+        .filter-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .filter-group label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #2c5aa0;
+        }
+        
+        .filter-group select,
+        .filter-group input {
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .filter-group select:focus,
+        .filter-group input:focus {
+            outline: none;
+            border-color: #2c5aa0;
+        }
+        
+        .clear-filters {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .clear-filters:hover {
+            background: #ff5252;
+        }
+        
+        .results-info {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #666;
+        }
+        
+        .sort-options {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .sort-btn {
+            background: #e3f2fd;
+            color: #2c5aa0;
+            border: 2px solid #2c5aa0;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .sort-btn.active,
+        .sort-btn:hover {
+            background: #2c5aa0;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>🌍 Tourism Explorer</h2>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="destinations.html" class="nav-link active">Destinations</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Destinations Page Content -->
+    <div class="destinations-page">
+        <!-- Filter Section -->
+        <section class="filter-section">
+            <div class="filter-container">
+                <h2>Find Your Perfect Destination</h2>
+                <p>Use our filters to discover destinations that match your interests and budget</p>
+                
+                <div class="filter-grid">
+                    <div class="filter-group">
+                        <label for="location-filter">Location</label>
+                        <select id="location-filter">
+                            <option value="">All Locations</option>
+                            <option value="Greece">Greece</option>
+                            <option value="Japan">Japan</option>
+                            <option value="Peru">Peru</option>
+                            <option value="Indonesia">Indonesia</option>
+                            <option value="Iceland">Iceland</option>
+                            <option value="UAE">UAE</option>
+                            <option value="New Zealand">New Zealand</option>
+                            <option value="Morocco">Morocco</option>
+                            <option value="Switzerland">Switzerland</option>
+                            <option value="Thailand">Thailand</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="price-filter">Max Price</label>
+                        <select id="price-filter">
+                            <option value="">Any Price</option>
+                            <option value="1000">Under $1,000</option>
+                            <option value="1500">Under $1,500</option>
+                            <option value="2000">Under $2,000</option>
+                            <option value="2500">Under $2,500</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="rating-filter">Min Rating</label>
+                        <select id="rating-filter">
+                            <option value="">Any Rating</option>
+                            <option value="4.5">4.5+ Stars</option>
+                            <option value="4.7">4.7+ Stars</option>
+                            <option value="4.8">4.8+ Stars</option>
+                            <option value="4.9">4.9+ Stars</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="tag-filter">Category</label>
+                        <select id="tag-filter">
+                            <option value="">All Categories</option>
+                            <option value="Beach">Beach</option>
+                            <option value="Cultural">Cultural</option>
+                            <option value="Adventure">Adventure</option>
+                            <option value="Historic">Historic</option>
+                            <option value="Nature">Nature</option>
+                            <option value="Luxury">Luxury</option>
+                            <option value="Romantic">Romantic</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div style="text-align: center;">
+                    <button class="clear-filters" onclick="clearFilters()">Clear All Filters</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section class="destinations">
+            <div class="container">
+                <div class="results-info">
+                    <p id="results-count">Showing all destinations</p>
+                </div>
+                
+                <div class="sort-options">
+                    <button class="sort-btn active" onclick="sortDestinations('name')">Name A-Z</button>
+                    <button class="sort-btn" onclick="sortDestinations('price')">Price</button>
+                    <button class="sort-btn" onclick="sortDestinations('rating')">Rating</button>
+                    <button class="sort-btn" onclick="sortDestinations('duration')">Duration</button>
+                </div>
+                
+                <div class="destinations-grid" id="destinations-grid">
+                    <!-- Destinations will be loaded here -->
+                </div>
+                
+                <div class="load-more-container">
+                    <button class="load-more-btn" onclick="loadMoreDestinations()">Load More Destinations</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Tourism Explorer</h3>
+                    <p>Your gateway to amazing destinations around the world.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="destinations.html">Destinations</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#">Travel Planning</a></li>
+                        <li><a href="#">Hotel Booking</a></li>
+                        <li><a href="#">Tour Packages</a></li>
+                        <li><a href="#">Travel Insurance</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe to get travel tips and exclusive offers</p>
+                    <div class="newsletter-form">
+                        <input type="email" placeholder="Your email" id="newsletter-email">
+                        <button onclick="subscribeNewsletter()">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Tourism Explorer. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Destinations page specific functionality
+        let filteredDestinations = [];
+        let currentSort = 'name';
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeDestinationsPage();
+        });
+        
+        function initializeDestinationsPage() {
+            setupNavigation();
+            setupFilters();
+            loadAllDestinations();
+        }
+        
+        function loadAllDestinations() {
+            filteredDestinations = [...allDestinations];
+            renderFilteredDestinations();
+            updateResultsCount();
+        }
+        
+        function setupFilters() {
+            const filters = ['location-filter', 'price-filter', 'rating-filter', 'tag-filter'];
+            
+            filters.forEach(filterId => {
+                const filter = document.getElementById(filterId);
+                filter.addEventListener('change', applyFilters);
+            });
+        }
+        
+        function applyFilters() {
+            const location = document.getElementById('location-filter').value;
+            const maxPrice = document.getElementById('price-filter').value;
+            const minRating = document.getElementById('rating-filter').value;
+            const tag = document.getElementById('tag-filter').value;
+            
+            filteredDestinations = allDestinations.filter(destination => {
+                const locationMatch = !location || destination.location === location;
+                const priceMatch = !maxPrice || parseInt(destination.price.replace(/[$,]/g, '')) <= parseInt(maxPrice);
+                const ratingMatch = !minRating || destination.rating >= parseFloat(minRating);
+                const tagMatch = !tag || destination.tags.includes(tag);
+                
+                return locationMatch && priceMatch && ratingMatch && tagMatch;
+            });
+            
+            sortDestinations(currentSort);
+            updateResultsCount();
+        }
+        
+        function clearFilters() {
+            document.getElementById('location-filter').value = '';
+            document.getElementById('price-filter').value = '';
+            document.getElementById('rating-filter').value = '';
+            document.getElementById('tag-filter').value = '';
+            
+            filteredDestinations = [...allDestinations];
+            sortDestinations(currentSort);
+            updateResultsCount();
+        }
+        
+        function sortDestinations(sortBy) {
+            currentSort = sortBy;
+            
+            // Update active sort button
+            document.querySelectorAll('.sort-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            filteredDestinations.sort((a, b) => {
+                switch(sortBy) {
+                    case 'name':
+                        return a.name.localeCompare(b.name);
+                    case 'price':
+                        return parseInt(a.price.replace(/[$,]/g, '')) - parseInt(b.price.replace(/[$,]/g, ''));
+                    case 'rating':
+                        return b.rating - a.rating;
+                    case 'duration':
+                        return parseInt(a.duration) - parseInt(b.duration);
+                    default:
+                        return 0;
+                }
+            });
+            
+            renderFilteredDestinations();
+        }
+        
+        function renderFilteredDestinations() {
+            const grid = document.getElementById('destinations-grid');
+            grid.innerHTML = '';
+            
+            filteredDestinations.forEach(destination => {
+                const card = createDestinationCard(destination);
+                grid.appendChild(card);
+            });
+            
+            // Add animation to cards
+            const cards = grid.querySelectorAll('.destination-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 50);
+            });
+        }
+        
+        function updateResultsCount() {
+            const count = filteredDestinations.length;
+            const resultsCount = document.getElementById('results-count');
+            resultsCount.textContent = `Showing ${count} destination${count !== 1 ? 's' : ''}`;
+        }
+        
+        function loadMoreDestinations() {
+            // For this demo, we'll just show all destinations
+            // In a real app, this would load more from a server
+            alert('All destinations are currently displayed. More destinations coming soon!');
+        }
+    </script>
+</body>
+</html>

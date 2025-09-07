@@ -1,0 +1,27 @@
+{
+    "name": "Tourism Explorer",
+    "short_name": "Tourism Explorer",
+    "description": "Discover amazing destinations around the world with Tourism Explorer",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#2c5aa0",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "categories": ["travel", "tourism", "lifestyle"],
+    "lang": "en",
+    "dir": "ltr"
+}
