@@ -1,15 +1,18 @@
-# Tourism Explorer Website
+# Jharkhand Tourism Website
 
-A modern, interactive tourism website built with HTML5, CSS3, and JavaScript. Features responsive design, SEO optimization, and interactive elements for an engaging user experience.
+A modern, interactive tourism website showcasing the natural beauty and rich culture of Jharkhand, India. Built with HTML5, CSS3, and JavaScript featuring responsive design, SEO optimization, and interactive elements for an engaging user experience.
 
 ## 🌟 Features
 
 ### Interactive Elements
-- **Dynamic Destination Gallery**: Browse through curated travel destinations with detailed information
-- **Advanced Search & Filtering**: Find destinations by location, price, rating, and category
-- **Interactive Photo Gallery**: View stunning travel photos in a modal gallery
+- **Jharkhand Destinations**: Browse through waterfalls, temples, wildlife sanctuaries, and hill stations
+- **Advanced Search & Filtering**: Find Jharkhand destinations by location, price, rating, and category
+- **Interactive Photo Gallery**: View stunning photos of Jharkhand's natural beauty
 - **Smooth Animations**: CSS animations and transitions for enhanced user experience
 - **Mobile-Responsive Navigation**: Hamburger menu for mobile devices
+- **User Authentication**: Sign up, sign in, and user management system
+- **Guide Registration**: Become a local guide for Jharkhand tourism
+- **Admin Panel**: Comprehensive admin dashboard with expenditure analysis and user management
 
 ### SEO Optimization
 - **Semantic HTML5**: Proper use of semantic elements for better accessibility
@@ -51,16 +54,16 @@ A modern, interactive tourism website built with HTML5, CSS3, and JavaScript. Fe
 ## 🎨 Customization
 
 ### Colors
-The website uses a consistent color scheme defined in CSS variables:
-- Primary Blue: `#2c5aa0`
-- Secondary Red: `#ff6b6b`
-- Gold Accent: `#ffd700`
-- Dark Blue: `#1e3d72`
+The website uses Jharkhand-themed colors:
+- Primary Green: `#2e7d32` (Forest Green)
+- Secondary Orange: `#ff6f00` (Earth Orange)
+- Accent Red: `#d32f2f` (Cultural Red)
+- Dark Green: `#1b5e20` (Deep Forest)
 
 ### Content
-- **Destinations**: Edit the `destinationsData` array in `script.js`
-- **Company Info**: Update contact information in HTML files
-- **Images**: Replace placeholder images with your own
+- **Jharkhand Destinations**: Edit the `destinationsData` array in `script.js` with local attractions
+- **Tourism Board Info**: Update contact information for Jharkhand Tourism Board
+- **Images**: Replace with actual photos of Jharkhand's attractions
 
 ### Styling
 - **Fonts**: Currently uses system fonts, easily changeable in CSS
@@ -125,9 +128,10 @@ The website is fully responsive with breakpoints at:
 
 ## 📞 Support
 
-For support or questions about this website template:
-- Email: info@tourism-explorer.com
-- Phone: +1 (555) 123-4567
+For support or questions about Jharkhand Tourism:
+- Email: info@jharkhandtourism.com
+- Phone: +91-651-XXX-XXXX
+- Address: Tourism Complex, Ranchi, Jharkhand 834001
 
 ## 📄 License
 
@@ -144,4 +148,4 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ---
 
-**Tourism Explorer** - Your gateway to amazing destinations around the world! 🌍✈️
+**Jharkhand Tourism** - Your gateway to the natural beauty and rich culture of Jharkhand! 🏞️🌿

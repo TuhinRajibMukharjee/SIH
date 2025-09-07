@@ -6,95 +6,95 @@ let displayedDestinations = 6;
 let allDestinations = [];
 let currentUser = null;
 
-// Sample destinations data
+// Jharkhand destinations data
 const destinationsData = [
     {
         id: 1,
-        name: "Santorini, Greece",
-        description: "Experience the breathtaking sunsets and white-washed buildings of this iconic Greek island.",
-        image: "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        rating: 4.9,
-        price: "$1,200",
-        tags: ["Beach", "Romantic", "Historic"],
-        location: "Greece",
-        duration: "5 days"
+        name: "Dassam Falls",
+        description: "Magnificent waterfall cascading from 144 feet height, surrounded by lush greenery and perfect for nature lovers.",
+        image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        rating: 4.8,
+        price: "₹500",
+        tags: ["Waterfall", "Nature", "Adventure"],
+        location: "Ranchi",
+        duration: "1 day"
     },
     {
         id: 2,
-        name: "Kyoto, Japan",
-        description: "Discover ancient temples, traditional gardens, and the beauty of Japanese culture.",
-        image: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        rating: 4.8,
-        price: "$1,500",
-        tags: ["Cultural", "Historic", "Temples"],
-        location: "Japan",
-        duration: "7 days"
+        name: "Betla National Park",
+        description: "Rich wildlife sanctuary with tigers, elephants, and diverse flora and fauna in their natural habitat.",
+        image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        rating: 4.7,
+        price: "₹800",
+        tags: ["Wildlife", "Nature", "Safari"],
+        location: "Palamu",
+        duration: "2 days"
     },
     {
         id: 3,
-        name: "Machu Picchu, Peru",
-        description: "Hike to the ancient Incan citadel and witness one of the world's most spectacular archaeological sites.",
-        image: "https://images.unsplash.com/photo-1526392060635-9d6019884377?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        rating: 4.9,
-        price: "$2,000",
-        tags: ["Adventure", "Historic", "Hiking"],
-        location: "Peru",
-        duration: "10 days"
+        name: "Jagannath Temple",
+        description: "Ancient temple dedicated to Lord Jagannath with beautiful architecture and spiritual significance.",
+        image: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        rating: 4.6,
+        price: "₹200",
+        tags: ["Temple", "Spiritual", "Historic"],
+        location: "Ranchi",
+        duration: "Half day"
     },
     {
         id: 4,
-        name: "Bali, Indonesia",
-        description: "Relax on pristine beaches, explore lush rice terraces, and immerse yourself in Balinese culture.",
-        image: "https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        rating: 4.7,
-        price: "$800",
-        tags: ["Beach", "Cultural", "Nature"],
-        location: "Indonesia",
-        duration: "8 days"
+        name: "Hundru Falls",
+        description: "Stunning waterfall with a height of 320 feet, perfect for adventure seekers and photography enthusiasts.",
+        image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        rating: 4.8,
+        price: "₹400",
+        tags: ["Waterfall", "Adventure", "Photography"],
+        location: "Ranchi",
+        duration: "1 day"
     },
     {
         id: 5,
-        name: "Iceland",
-        description: "Witness the Northern Lights, geysers, and dramatic landscapes of this Nordic wonderland.",
-        image: "https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        rating: 4.8,
-        price: "$1,800",
-        tags: ["Nature", "Adventure", "Northern Lights"],
-        location: "Iceland",
-        duration: "6 days"
+        name: "Netarhat",
+        description: "Queen of Chotanagpur - a hill station with pleasant climate, scenic views, and peaceful environment.",
+        image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        rating: 4.7,
+        price: "₹600",
+        tags: ["Hill Station", "Nature", "Peaceful"],
+        location: "Latehar",
+        duration: "2 days"
     },
     {
         id: 6,
-        name: "Dubai, UAE",
-        description: "Experience luxury shopping, world-class dining, and modern architectural marvels.",
-        image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        rating: 4.6,
-        price: "$1,400",
-        tags: ["Luxury", "Modern", "Shopping"],
-        location: "UAE",
-        duration: "5 days"
+        name: "Baidyanath Temple",
+        description: "One of the 12 Jyotirlingas, a sacred pilgrimage site for devotees with rich spiritual heritage.",
+        image: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        rating: 4.9,
+        price: "₹300",
+        tags: ["Temple", "Spiritual", "Pilgrimage"],
+        location: "Deoghar",
+        duration: "1 day"
     },
     {
         id: 7,
-        name: "New Zealand",
-        description: "Explore stunning fjords, adventure sports, and the breathtaking landscapes of Middle Earth.",
-        image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        rating: 4.9,
-        price: "$2,200",
-        tags: ["Adventure", "Nature", "Hiking"],
-        location: "New Zealand",
-        duration: "12 days"
+        name: "Patratu Valley",
+        description: "Picturesque valley with winding roads, beautiful landscapes, and perfect for road trips.",
+        image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        rating: 4.5,
+        price: "₹350",
+        tags: ["Valley", "Nature", "Road Trip"],
+        location: "Ramgarh",
+        duration: "1 day"
     },
     {
         id: 8,
-        name: "Morocco",
-        description: "Wander through ancient medinas, ride camels in the Sahara, and experience vibrant culture.",
-        image: "https://images.unsplash.com/photo-1539650116574-75c0c6d73c6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        rating: 4.7,
-        price: "$1,100",
-        tags: ["Cultural", "Desert", "Historic"],
-        location: "Morocco",
-        duration: "9 days"
+        name: "Hazaribagh National Park",
+        description: "Wildlife sanctuary with diverse species, beautiful forest trails, and nature photography opportunities.",
+        image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        rating: 4.6,
+        price: "₹700",
+        tags: ["Wildlife", "Nature", "Photography"],
+        location: "Hazaribagh",
+        duration: "2 days"
     },
     {
         id: 9,
@@ -126,7 +126,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function initializeWebsite() {
-    checkUserAuthentication();
     setupNavigation();
     loadDestinations();
     setupSearch();
@@ -135,6 +134,7 @@ function initializeWebsite() {
     setupScrollAnimations();
     setupImageLazyLoading();
     setupQuickGuideForm();
+    setupUserAuthentication();
 }
 
 // Navigation functionality
@@ -682,6 +682,402 @@ function showGuideTerms() {
 
 function showGuidePrivacy() {
     alert('Guide Privacy Policy: We protect your personal information and only share it as necessary for verification and platform operations. Your contact information will be shared with guests only after confirmed bookings.');
+}
+
+// Admin Section Functions
+const ADMIN_PASSKEY = "admin123"; // Default passkey - change this in production
+
+function showAdminLogin() {
+    const modal = document.getElementById('admin-login-modal');
+    modal.style.display = 'flex';
+    document.getElementById('admin-passkey').focus();
+}
+
+function closeAdminLogin() {
+    const modal = document.getElementById('admin-login-modal');
+    modal.style.display = 'none';
+    document.getElementById('admin-passkey').value = '';
+}
+
+function verifyAdminPasskey() {
+    const passkey = document.getElementById('admin-passkey').value;
+    
+    if (passkey === ADMIN_PASSKEY) {
+        closeAdminLogin();
+        showAdminPanel();
+    } else {
+        alert('Invalid passkey. Please try again.');
+        document.getElementById('admin-passkey').value = '';
+    }
+}
+
+function showAdminPanel() {
+    const adminSection = document.getElementById('admin-section');
+    adminSection.style.display = 'block';
+    adminSection.classList.add('show');
+    document.body.style.overflow = 'hidden';
+    
+    // Load admin data
+    loadAdminData();
+}
+
+function closeAdminPanel() {
+    const adminSection = document.getElementById('admin-section');
+    adminSection.classList.remove('show');
+    setTimeout(() => {
+        adminSection.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }, 300);
+}
+
+function showAdminTab(tabName) {
+    // Hide all tab contents
+    document.querySelectorAll('.admin-tab-content').forEach(tab => {
+        tab.classList.remove('active');
+    });
+    
+    // Remove active class from all tabs
+    document.querySelectorAll('.admin-tab').forEach(tab => {
+        tab.classList.remove('active');
+    });
+    
+    // Show selected tab content
+    document.getElementById(`admin-${tabName}`).classList.add('active');
+    
+    // Add active class to clicked tab
+    event.target.classList.add('active');
+    
+    // Load specific data for the tab
+    if (tabName === 'users') {
+        loadUsersData();
+    } else if (tabName === 'guides') {
+        loadGuidesData();
+    } else if (tabName === 'destinations') {
+        loadDestinationsData();
+    } else if (tabName === 'blocked') {
+        loadBlockedUsersData();
+    }
+}
+
+function loadAdminData() {
+    // Update last updated time
+    document.getElementById('last-updated').textContent = new Date().toLocaleDateString();
+    
+    // Load overview data
+    loadOverviewData();
+}
+
+function loadOverviewData() {
+    // Count users
+    const userData = localStorage.getItem('user');
+    const totalUsers = userData ? 1 : 0;
+    document.getElementById('total-users').textContent = totalUsers;
+    
+    // Count guide applications
+    const guideApp = localStorage.getItem('guideApplication');
+    const quickGuideApp = localStorage.getItem('quickGuideApplication');
+    const totalGuides = (guideApp ? 1 : 0) + (quickGuideApp ? 1 : 0);
+    document.getElementById('total-guides').textContent = totalGuides;
+    
+    // Count destinations
+    document.getElementById('total-destinations').textContent = allDestinations.length;
+    
+    // Simulate page views
+    const pageViews = localStorage.getItem('pageViews') || '0';
+    const newPageViews = parseInt(pageViews) + 1;
+    localStorage.setItem('pageViews', newPageViews.toString());
+    document.getElementById('page-views').textContent = newPageViews;
+}
+
+function loadUsersData() {
+    const tbody = document.getElementById('users-table-body');
+    tbody.innerHTML = '';
+    
+    const userData = localStorage.getItem('user');
+    if (userData) {
+        const user = JSON.parse(userData);
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${user.firstName || user.name || 'N/A'} ${user.lastName || ''}</td>
+            <td>${user.email}</td>
+            <td>${user.country || 'N/A'}</td>
+            <td>${user.travelInterests || 'N/A'}</td>
+            <td>${new Date(user.signupTime || user.loginTime).toLocaleDateString()}</td>
+        `;
+        tbody.appendChild(row);
+    } else {
+        const row = document.createElement('tr');
+        row.innerHTML = '<td colspan="5" style="text-align: center; color: #666;">No users registered yet</td>';
+        tbody.appendChild(row);
+    }
+}
+
+function loadGuidesData() {
+    const tbody = document.getElementById('guides-table-body');
+    tbody.innerHTML = '';
+    
+    const guideApp = localStorage.getItem('guideApplication');
+    const quickGuideApp = localStorage.getItem('quickGuideApplication');
+    
+    if (guideApp) {
+        const guide = JSON.parse(guideApp);
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${guide.firstName} ${guide.lastName}</td>
+            <td>${guide.email}</td>
+            <td>${guide.address || 'N/A'}</td>
+            <td>${guide.experience}</td>
+            <td>${guide.specialties}</td>
+            <td><span style="color: #ffd700;">${guide.status}</span></td>
+            <td>${new Date(guide.applicationDate).toLocaleDateString()}</td>
+        `;
+        tbody.appendChild(row);
+    }
+    
+    if (quickGuideApp) {
+        const guide = JSON.parse(quickGuideApp);
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${guide.firstName} ${guide.lastName}</td>
+            <td>${guide.email}</td>
+            <td>${guide.location}</td>
+            <td>${guide.experience}</td>
+            <td>${guide.specialty}</td>
+            <td><span style="color: #ffd700;">${guide.status}</span></td>
+            <td>${new Date(guide.applicationDate).toLocaleDateString()}</td>
+        `;
+        tbody.appendChild(row);
+    }
+    
+    if (!guideApp && !quickGuideApp) {
+        const row = document.createElement('tr');
+        row.innerHTML = '<td colspan="7" style="text-align: center; color: #666;">No guide applications yet</td>';
+        tbody.appendChild(row);
+    }
+}
+
+function loadDestinationsData() {
+    const tbody = document.getElementById('destinations-table-body');
+    tbody.innerHTML = '';
+    
+    allDestinations.forEach(destination => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${destination.name}</td>
+            <td>${destination.location}</td>
+            <td>${'★'.repeat(Math.floor(destination.rating))} ${destination.rating}</td>
+            <td>${destination.price}</td>
+            <td>${destination.duration}</td>
+            <td>${destination.tags.join(', ')}</td>
+        `;
+        tbody.appendChild(row);
+    });
+}
+
+// User Authentication Setup
+function setupUserAuthentication() {
+    // Check if user is authenticated
+    if (checkUserAuthentication()) {
+        // User is logged in, update navigation
+        const token = localStorage.getItem('authToken');
+        try {
+            const payload = JSON.parse(atob(token.split('.')[1]));
+            updateNavigationForLoggedInUser({
+                firstName: payload.firstName || 'User',
+                lastName: payload.lastName || '',
+                email: payload.email
+            });
+        } catch (error) {
+            api.removeToken();
+        }
+    }
+    
+    // Track page view
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    trackPageView(currentPage);
+}
+
+// Track page views using API
+async function trackPageView(page) {
+    try {
+        const token = localStorage.getItem('authToken');
+        let userId = null;
+        
+        if (token) {
+            try {
+                const payload = JSON.parse(atob(token.split('.')[1]));
+                userId = payload.id;
+            } catch (error) {
+                // Token is invalid, ignore
+            }
+        }
+
+        await api.trackPageView(page, userId);
+    } catch (error) {
+        console.error('Failed to track page view:', error);
+        // Fallback to localStorage
+        const pageViews = localStorage.getItem('pageViews') || '0';
+        const newPageViews = parseInt(pageViews) + 1;
+        localStorage.setItem('pageViews', newPageViews.toString());
+    }
+}
+
+// Blocked Users Management
+function loadBlockedUsersData() {
+    const tbody = document.getElementById('blocked-users-table-body');
+    tbody.innerHTML = '';
+    
+    const blockedUsers = JSON.parse(localStorage.getItem('blockedUsers') || '[]');
+    
+    if (blockedUsers.length === 0) {
+        const row = document.createElement('tr');
+        row.innerHTML = '<td colspan="6" style="text-align: center; color: #666;">No blocked users</td>';
+        tbody.appendChild(row);
+    } else {
+        blockedUsers.forEach((user, index) => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${user.id}</td>
+                <td>${user.email}</td>
+                <td>${user.reason}</td>
+                <td>${new Date(user.blockedDate).toLocaleDateString()}</td>
+                <td>${user.blockedBy}</td>
+                <td>
+                    <button class="unblock-btn" onclick="unblockUser(${index})">Unblock</button>
+                    <button class="delete-btn" onclick="deleteBlockedUser(${index})">Delete</button>
+                </td>
+            `;
+            tbody.appendChild(row);
+        });
+    }
+    
+    // Update blocked stats
+    updateBlockedStats();
+}
+
+function updateBlockedStats() {
+    const blockedUsers = JSON.parse(localStorage.getItem('blockedUsers') || '[]');
+    const currentMonth = new Date().getMonth();
+    const currentYear = new Date().getFullYear();
+    
+    const monthlyBlocked = blockedUsers.filter(user => {
+        const blockedDate = new Date(user.blockedDate);
+        return blockedDate.getMonth() === currentMonth && blockedDate.getFullYear() === currentYear;
+    });
+    
+    document.getElementById('total-blocked-count').textContent = blockedUsers.length;
+    document.getElementById('monthly-blocked-count').textContent = monthlyBlocked.length;
+    document.getElementById('active-blocks-count').textContent = blockedUsers.length;
+}
+
+function showBlockUserModal() {
+    const modal = document.getElementById('block-user-modal');
+    modal.style.display = 'flex';
+    document.getElementById('block-user-email').focus();
+}
+
+function closeBlockUserModal() {
+    const modal = document.getElementById('block-user-modal');
+    modal.style.display = 'none';
+    
+    // Reset form
+    document.getElementById('block-user-email').value = '';
+    document.getElementById('block-reason').value = '';
+    document.getElementById('block-details').value = '';
+    document.getElementById('block-duration').value = 'temporary';
+}
+
+function blockUser() {
+    const email = document.getElementById('block-user-email').value;
+    const reason = document.getElementById('block-reason').value;
+    const details = document.getElementById('block-details').value;
+    const duration = document.getElementById('block-duration').value;
+    
+    if (!email || !reason) {
+        alert('Please fill in all required fields.');
+        return;
+    }
+    
+    if (!isValidEmail(email)) {
+        alert('Please enter a valid email address.');
+        return;
+    }
+    
+    // Check if user is already blocked
+    const blockedUsers = JSON.parse(localStorage.getItem('blockedUsers') || '[]');
+    if (blockedUsers.some(user => user.email === email)) {
+        alert('This user is already blocked.');
+        return;
+    }
+    
+    // Create blocked user record
+    const blockedUser = {
+        id: 'BLK' + Date.now(),
+        email: email,
+        reason: reason,
+        details: details,
+        duration: duration,
+        blockedDate: new Date().toISOString(),
+        blockedBy: 'Admin',
+        status: 'active'
+    };
+    
+    // Add to blocked users list
+    blockedUsers.push(blockedUser);
+    localStorage.setItem('blockedUsers', JSON.stringify(blockedUsers));
+    
+    // Check if current user is being blocked
+    const currentUser = JSON.parse(localStorage.getItem('user') || 'null');
+    if (currentUser && currentUser.email === email) {
+        alert('You have been blocked from accessing this website.');
+        localStorage.removeItem('user');
+        window.location.reload();
+        return;
+    }
+    
+    alert('User blocked successfully.');
+    closeBlockUserModal();
+    loadBlockedUsersData();
+}
+
+function unblockUser(index) {
+    if (confirm('Are you sure you want to unblock this user?')) {
+        const blockedUsers = JSON.parse(localStorage.getItem('blockedUsers') || '[]');
+        blockedUsers.splice(index, 1);
+        localStorage.setItem('blockedUsers', JSON.stringify(blockedUsers));
+        loadBlockedUsersData();
+        alert('User unblocked successfully.');
+    }
+}
+
+function deleteBlockedUser(index) {
+    if (confirm('Are you sure you want to permanently delete this blocked user record?')) {
+        const blockedUsers = JSON.parse(localStorage.getItem('blockedUsers') || '[]');
+        blockedUsers.splice(index, 1);
+        localStorage.setItem('blockedUsers', JSON.stringify(blockedUsers));
+        loadBlockedUsersData();
+        alert('Blocked user record deleted successfully.');
+    }
+}
+
+function refreshBlockedUsers() {
+    loadBlockedUsersData();
+    alert('Blocked users list refreshed.');
+}
+
+// Check if current user is blocked
+function checkUserBlocked() {
+    const currentUser = JSON.parse(localStorage.getItem('user') || 'null');
+    if (currentUser) {
+        const blockedUsers = JSON.parse(localStorage.getItem('blockedUsers') || '[]');
+        const isBlocked = blockedUsers.some(user => user.email === currentUser.email && user.status === 'active');
+        
+        if (isBlocked) {
+            alert('Your account has been blocked. Please contact support.');
+            localStorage.removeItem('user');
+            window.location.reload();
+        }
+    }
 }
 
 // Contact form
