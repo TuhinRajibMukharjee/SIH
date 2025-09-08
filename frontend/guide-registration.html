@@ -631,9 +631,9 @@
         </div>
     </div>
 
+    <script src="api.js"></script>
     <script src="script.js"></script>
     <script>
-        // Guide registration specific functionality
         document.addEventListener('DOMContentLoaded', function() {
             setupGuideForm();
             setupProgressBar();
@@ -643,19 +643,40 @@
         function setupGuideForm() {
             const form = document.getElementById('guide-form');
             
-            form.addEventListener('submit', function(e) {
+            form.addEventListener('submit', async function(e) {
                 e.preventDefault();
                 
                 const formData = new FormData(form);
                 const data = Object.fromEntries(formData);
                 
-                // Validate form
                 if (!validateGuideForm(data)) {
                     return;
                 }
                 
-                // Submit application
-                submitGuideApplication(data);
+                const submitBtn = document.getElementById('submit-btn');
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = 'Submitting Application...';
+                submitBtn.disabled = true;
+                
+                try {
+                    await submitGuideApplication({
+                        fullName: `${data.firstName} ${data.lastName}`.trim(),
+                        email: data.email,
+                        phone: data.phone,
+                        experienceYears: isNaN(parseInt(data.experience)) ? 0 : parseInt(data.experience),
+                        languages: data.languages,
+                        specializations: data.specialties,
+                        bio: data.description
+                    });
+                    showSuccess('Application submitted successfully!');
+                    form.reset();
+                    document.getElementById('progress-fill').style.width = '0%';
+                } catch (err) {
+                    showError(err.message || 'Failed to submit application');
+                } finally {
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }
             });
         }
         
@@ -692,110 +713,36 @@
         }
         
         function validateGuideForm(data) {
-            const errorMessage = document.getElementById('error-message');
-            
-            // Required fields validation
-            const requiredFields = ['firstName', 'lastName', 'email', 'phone', 'birthDate', 'country', 'address', 
-                                  'experience', 'specialties', 'languages', 'description', 'groupSize', 'hourlyRate', 'availability'];
-            
+            const requiredFields = ['firstName','lastName','email','phone','birthDate','country','address','experience','specialties','languages','description','groupSize','hourlyRate','availability','terms','liability','verification'];
             for (let field of requiredFields) {
-                if (!data[field] || !data[field].trim()) {
+                if (!data[field] || (typeof data[field] === 'string' && !data[field].trim())) {
                     showError(`${field.replace(/([A-Z])/g, ' $1').toLowerCase()} is required.`);
                     return false;
                 }
             }
-            
-            // Email validation
             if (!isValidEmail(data.email)) {
                 showError('Please enter a valid email address.');
                 return false;
             }
-            
-            // Phone validation
-            if (!isValidPhone(data.phone)) {
-                showError('Please enter a valid phone number.');
-                return false;
-            }
-            
-            // Age validation
-            const birthDate = new Date(data.birthDate);
-            const today = new Date();
-            const age = today.getFullYear() - birthDate.getFullYear();
-            if (age < 18) {
-                showError('You must be at least 18 years old to become a guide.');
-                return false;
-            }
-            
-            // Hourly rate validation
             const hourlyRate = parseInt(data.hourlyRate);
             if (hourlyRate < 10 || hourlyRate > 500) {
                 showError('Hourly rate must be between $10 and $500.');
                 return false;
             }
-            
-            // Tour types validation
-            const tourTypes = form.querySelectorAll('input[name="tourTypes"]:checked');
-            if (tourTypes.length === 0) {
-                showError('Please select at least one type of tour you offer.');
-                return false;
-            }
-            
-            // Terms validation
-            if (!data.terms || !data.liability || !data.verification) {
-                showError('You must agree to all required terms and conditions.');
-                return false;
-            }
-            
             return true;
-        }
-        
-        function submitGuideApplication(data) {
-            const submitBtn = document.getElementById('submit-btn');
-            const originalText = submitBtn.textContent;
-            
-            submitBtn.textContent = 'Submitting Application...';
-            submitBtn.disabled = true;
-            
-            // Simulate API call
-            setTimeout(() => {
-                // Store application data
-                const applicationData = {
-                    ...data,
-                    applicationDate: new Date().toISOString(),
-                    status: 'pending'
-                };
-                
-                localStorage.setItem('guideApplication', JSON.stringify(applicationData));
-                
-                showSuccess('Application submitted successfully! We will review your application and contact you within 3-5 business days.');
-                
-                // Reset form
-                document.getElementById('guide-form').reset();
-                document.getElementById('progress-fill').style.width = '0%';
-                
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            }, 3000);
         }
         
         function showError(message) {
             const errorDiv = document.getElementById('error-message');
             const successDiv = document.getElementById('success-message');
-            
             successDiv.style.display = 'none';
             errorDiv.textContent = message;
             errorDiv.style.display = 'block';
-            
-            // Auto-hide after 5 seconds
-            setTimeout(() => {
-                errorDiv.style.display = 'none';
-            }, 5000);
         }
         
         function showSuccess(message) {
             const errorDiv = document.getElementById('error-message');
             const successDiv = document.getElementById('success-message');
-            
             errorDiv.style.display = 'none';
             successDiv.textContent = message;
             successDiv.style.display = 'block';
@@ -809,9 +756,9 @@
             alert('Guide Privacy Policy: We protect your personal information and only share it as necessary for verification and platform operations. Your contact information will be shared with guests only after confirmed bookings.');
         }
         
-        function isValidPhone(phone) {
-            const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
-            return phoneRegex.test(phone.replace(/[\s\-\(\)]/g, ''));
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
         }
     </script>
 </body>

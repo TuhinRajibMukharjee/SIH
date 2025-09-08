@@ -125,9 +125,9 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeWebsite();
 });
 
-function initializeWebsite() {
+async function initializeWebsite() {
     setupNavigation();
-    loadDestinations();
+    await backendLoadDestinationsWithFallback();
     setupSearch();
     setupContactForm();
     setupNewsletter();
@@ -135,6 +135,33 @@ function initializeWebsite() {
     setupImageLazyLoading();
     setupQuickGuideForm();
     setupUserAuthentication();
+}
+
+// Load destinations from backend with fallback to local data
+async function backendLoadDestinationsWithFallback() {
+    try {
+        if (typeof api !== 'undefined' && api.getDestinations) {
+            const backend = await api.getDestinations({ limit: 12 });
+            allDestinations = backend.map(d => ({
+                id: d.id,
+                name: d.name,
+                description: d.description,
+                image: d.image_url || 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=800&q=80',
+                rating: d.rating || 0,
+                price: d.price || '',
+                tags: typeof d.tags === 'string' ? d.tags.split(',').map(t => t.trim()).filter(Boolean) : Array.isArray(d.tags) ? d.tags : [],
+                location: d.location || '',
+                duration: d.duration || ''
+            }));
+        } else {
+            allDestinations = [...destinationsData];
+        }
+    } catch (err) {
+        console.warn('Backend destinations failed, using local data:', err);
+        allDestinations = [...destinationsData];
+    }
+    currentDestinations = allDestinations.slice(0, displayedDestinations);
+    renderDestinations();
 }
 
 // Navigation functionality
@@ -289,113 +316,20 @@ function showDestinationDetails(destination) {
     // Add modal styles
     const style = document.createElement('style');
     style.textContent = `
-        .destination-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 2000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: fadeIn 0.3s ease;
-        }
-        
-        .modal-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-        
-        .modal-content {
-            background: white;
-            border-radius: 15px;
-            max-width: 800px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            position: relative;
-            animation: slideIn 0.3s ease;
-        }
-        
-        .modal-close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: none;
-            border: none;
-            font-size: 2rem;
-            cursor: pointer;
-            color: #666;
-            z-index: 1;
-        }
-        
-        .modal-image img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            border-radius: 15px 15px 0 0;
-        }
-        
-        .modal-info {
-            padding: 2rem;
-        }
-        
-        .modal-info h2 {
-            color: #2c5aa0;
-            margin-bottom: 1rem;
-        }
-        
-        .modal-description {
-            color: #666;
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-        
-        .modal-details {
-            margin-bottom: 1.5rem;
-        }
-        
-        .detail-item {
-            margin-bottom: 0.5rem;
-            color: #333;
-        }
-        
-        .book-now-btn {
-            background: #2c5aa0;
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 10px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-        }
-        
-        .book-now-btn:hover {
-            background: #1e3d72;
-            transform: translateY(-2px);
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        @keyframes slideIn {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
+        .destination-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 2000; display: flex; align-items: center; justify-content: center; animation: fadeIn 0.3s ease; }
+        .modal-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .modal-content { background: white; border-radius: 15px; max-width: 800px; width: 100%; max-height: 90vh; overflow-y: auto; position: relative; animation: slideIn 0.3s ease; }
+        .modal-close { position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 2rem; cursor: pointer; color: #666; z-index: 1; }
+        .modal-image img { width: 100%; height: 300px; object-fit: cover; border-radius: 15px 15px 0 0; }
+        .modal-info { padding: 2rem; }
+        .modal-info h2 { color: #2c5aa0; margin-bottom: 1rem; }
+        .modal-description { color: #666; margin-bottom: 1.5rem; line-height: 1.6; }
+        .modal-details { margin-bottom: 1.5rem; }
+        .detail-item { margin-bottom: 0.5rem; color: #333; }
+        .book-now-btn { background: #2c5aa0; color: white; border: none; padding: 1rem 2rem; border-radius: 10px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; width: 100%; }
+        .book-now-btn:hover { background: #1e3d72; transform: translateY(-2px); }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideIn { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
     `;
 
     document.head.appendChild(style);
@@ -445,7 +379,8 @@ function setupSearch() {
         if (query.length > 0) {
             searchDestinations(query);
         } else {
-            loadDestinations();
+            currentDestinations = allDestinations.slice(0, displayedDestinations);
+            renderDestinations();
         }
     });
 }
@@ -456,7 +391,8 @@ function searchDestinations(query = null) {
     }
     
     if (query.length === 0) {
-        loadDestinations();
+        currentDestinations = allDestinations.slice(0, displayedDestinations);
+        renderDestinations();
         return;
     }
     
@@ -470,7 +406,6 @@ function searchDestinations(query = null) {
     currentDestinations = filteredDestinations.slice(0, displayedDestinations);
     renderDestinations();
     
-    // Update load more button
     const loadMoreBtn = document.querySelector('.load-more-btn');
     if (filteredDestinations.length <= displayedDestinations) {
         loadMoreBtn.style.display = 'none';
@@ -513,39 +448,12 @@ function openGallery() {
     // Add gallery styles
     const style = document.createElement('style');
     style.textContent = `
-        .gallery-modal .modal-content {
-            max-width: 1000px;
-        }
-        
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-        
-        .gallery-item {
-            text-align: center;
-        }
-        
-        .gallery-item img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-        
-        .gallery-item img:hover {
-            transform: scale(1.05);
-        }
-        
-        .gallery-item p {
-            margin-top: 0.5rem;
-            font-size: 0.9rem;
-            color: #666;
-        }
+        .gallery-modal .modal-content { max-width: 1000px; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem; }
+        .gallery-item { text-align: center; }
+        .gallery-item img { width: 100%; height: 150px; object-fit: cover; border-radius: 10px; cursor: pointer; transition: transform 0.3s ease; }
+        .gallery-item img:hover { transform: scale(1.05); }
+        .gallery-item p { margin-top: 0.5rem; font-size: 0.9rem; color: #666; }
     `;
     
     document.head.appendChild(style);
@@ -611,12 +519,10 @@ function setupQuickGuideForm() {
             const formData = new FormData(form);
             const data = Object.fromEntries(formData);
             
-            // Validate form
             if (!validateQuickGuideForm(data)) {
                 return;
             }
             
-            // Submit application
             submitQuickGuideApplication(data);
         });
     }
@@ -653,9 +559,7 @@ function submitQuickGuideApplication(data) {
     submitBtn.textContent = 'Submitting...';
     submitBtn.disabled = true;
     
-    // Simulate API call
     setTimeout(() => {
-        // Store application data
         const applicationData = {
             ...data,
             applicationDate: new Date().toISOString(),
@@ -667,7 +571,6 @@ function submitQuickGuideApplication(data) {
         
         alert('Application submitted successfully! We will review your application and contact you within 3-5 business days.');
         
-        // Close modal and reset form
         closeGuideSignup();
         document.getElementById('quick-guide-form').reset();
         
@@ -717,7 +620,6 @@ function showAdminPanel() {
     adminSection.classList.add('show');
     document.body.style.overflow = 'hidden';
     
-    // Load admin data
     loadAdminData();
 }
 
@@ -731,23 +633,18 @@ function closeAdminPanel() {
 }
 
 function showAdminTab(tabName) {
-    // Hide all tab contents
     document.querySelectorAll('.admin-tab-content').forEach(tab => {
         tab.classList.remove('active');
     });
     
-    // Remove active class from all tabs
     document.querySelectorAll('.admin-tab').forEach(tab => {
         tab.classList.remove('active');
     });
     
-    // Show selected tab content
     document.getElementById(`admin-${tabName}`).classList.add('active');
     
-    // Add active class to clicked tab
     event.target.classList.add('active');
     
-    // Load specific data for the tab
     if (tabName === 'users') {
         loadUsersData();
     } else if (tabName === 'guides') {
@@ -760,29 +657,22 @@ function showAdminTab(tabName) {
 }
 
 function loadAdminData() {
-    // Update last updated time
     document.getElementById('last-updated').textContent = new Date().toLocaleDateString();
-    
-    // Load overview data
     loadOverviewData();
 }
 
 function loadOverviewData() {
-    // Count users
     const userData = localStorage.getItem('user');
     const totalUsers = userData ? 1 : 0;
     document.getElementById('total-users').textContent = totalUsers;
     
-    // Count guide applications
     const guideApp = localStorage.getItem('guideApplication');
     const quickGuideApp = localStorage.getItem('quickGuideApplication');
     const totalGuides = (guideApp ? 1 : 0) + (quickGuideApp ? 1 : 0);
     document.getElementById('total-guides').textContent = totalGuides;
     
-    // Count destinations
     document.getElementById('total-destinations').textContent = allDestinations.length;
     
-    // Simulate page views
     const pageViews = localStorage.getItem('pageViews') || '0';
     const newPageViews = parseInt(pageViews) + 1;
     localStorage.setItem('pageViews', newPageViews.toString());
@@ -876,9 +766,7 @@ function loadDestinationsData() {
 
 // User Authentication Setup
 function setupUserAuthentication() {
-    // Check if user is authenticated
     if (checkUserAuthentication()) {
-        // User is logged in, update navigation
         const token = localStorage.getItem('authToken');
         try {
             const payload = JSON.parse(atob(token.split('.')[1]));
@@ -888,11 +776,10 @@ function setupUserAuthentication() {
                 email: payload.email
             });
         } catch (error) {
-            api.removeToken();
+            if (typeof api !== 'undefined') api.removeToken();
         }
     }
     
-    // Track page view
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
     trackPageView(currentPage);
 }
@@ -907,15 +794,14 @@ async function trackPageView(page) {
             try {
                 const payload = JSON.parse(atob(token.split('.')[1]));
                 userId = payload.id;
-            } catch (error) {
-                // Token is invalid, ignore
-            }
+            } catch (error) {}
         }
-
-        await api.trackPageView(page, userId);
+        
+        if (typeof api !== 'undefined' && api.trackPageView) {
+            await api.trackPageView(page, userId);
+        }
     } catch (error) {
         console.error('Failed to track page view:', error);
-        // Fallback to localStorage
         const pageViews = localStorage.getItem('pageViews') || '0';
         const newPageViews = parseInt(pageViews) + 1;
         localStorage.setItem('pageViews', newPageViews.toString());
@@ -951,7 +837,6 @@ function loadBlockedUsersData() {
         });
     }
     
-    // Update blocked stats
     updateBlockedStats();
 }
 
@@ -980,7 +865,6 @@ function closeBlockUserModal() {
     const modal = document.getElementById('block-user-modal');
     modal.style.display = 'none';
     
-    // Reset form
     document.getElementById('block-user-email').value = '';
     document.getElementById('block-reason').value = '';
     document.getElementById('block-details').value = '';
@@ -1003,14 +887,12 @@ function blockUser() {
         return;
     }
     
-    // Check if user is already blocked
     const blockedUsers = JSON.parse(localStorage.getItem('blockedUsers') || '[]');
     if (blockedUsers.some(user => user.email === email)) {
         alert('This user is already blocked.');
         return;
     }
     
-    // Create blocked user record
     const blockedUser = {
         id: 'BLK' + Date.now(),
         email: email,
@@ -1022,11 +904,9 @@ function blockUser() {
         status: 'active'
     };
     
-    // Add to blocked users list
     blockedUsers.push(blockedUser);
     localStorage.setItem('blockedUsers', JSON.stringify(blockedUsers));
     
-    // Check if current user is being blocked
     const currentUser = JSON.parse(localStorage.getItem('user') || 'null');
     if (currentUser && currentUser.email === email) {
         alert('You have been blocked from accessing this website.');
@@ -1065,156 +945,6 @@ function refreshBlockedUsers() {
     alert('Blocked users list refreshed.');
 }
 
-// Check if current user is blocked
-function checkUserBlocked() {
-    const currentUser = JSON.parse(localStorage.getItem('user') || 'null');
-    if (currentUser) {
-        const blockedUsers = JSON.parse(localStorage.getItem('blockedUsers') || '[]');
-        const isBlocked = blockedUsers.some(user => user.email === currentUser.email && user.status === 'active');
-        
-        if (isBlocked) {
-            alert('Your account has been blocked. Please contact support.');
-            localStorage.removeItem('user');
-            window.location.reload();
-        }
-    }
-}
-
-// Contact form
-function setupContactForm() {
-    const form = document.getElementById('contact-form');
-    
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData);
-        
-        // Simulate form submission
-        const submitBtn = form.querySelector('.submit-btn');
-        const originalText = submitBtn.textContent;
-        submitBtn.textContent = 'Sending...';
-        submitBtn.disabled = true;
-        
-        setTimeout(() => {
-            alert('Thank you for your message! We will get back to you within 24 hours.');
-            form.reset();
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
-        }, 2000);
-    });
-}
-
-// Newsletter subscription
-function setupNewsletter() {
-    // Newsletter functionality is handled by the subscribeNewsletter function
-}
-
-function subscribeNewsletter() {
-    const email = document.getElementById('newsletter-email').value;
-    
-    if (!email || !isValidEmail(email)) {
-        alert('Please enter a valid email address.');
-        return;
-    }
-    
-    // Simulate subscription
-    const btn = event.target;
-    const originalText = btn.textContent;
-    btn.textContent = 'Subscribing...';
-    btn.disabled = true;
-    
-    setTimeout(() => {
-        alert('Thank you for subscribing to our newsletter!');
-        document.getElementById('newsletter-email').value = '';
-        btn.textContent = originalText;
-        btn.disabled = false;
-    }, 1500);
-}
-
-function isValidEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-}
-
-// Scroll animations
-function setupScrollAnimations() {
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
-    
-    // Observe elements for animation
-    const animateElements = document.querySelectorAll('.feature-card, .about-text, .about-image, .contact-info, .contact-form');
-    animateElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'all 0.6s ease';
-        observer.observe(el);
-    });
-}
-
-// Lazy loading for images
-function setupImageLazyLoading() {
-    const images = document.querySelectorAll('img[loading="lazy"]');
-    
-    if ('IntersectionObserver' in window) {
-        const imageObserver = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.src = img.src;
-                    img.classList.remove('lazy');
-                    imageObserver.unobserve(img);
-                }
-            });
-        });
-        
-        images.forEach(img => imageObserver.observe(img));
-    }
-}
-
-// Utility functions
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-// Performance optimization
-window.addEventListener('load', function() {
-    // Preload critical images
-    const criticalImages = [
-        'https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
-    ];
-    
-    criticalImages.forEach(src => {
-        const img = new Image();
-        img.src = src;
-    });
-});
-
-// Error handling
-window.addEventListener('error', function(e) {
-    console.error('An error occurred:', e.error);
-});
-
-// Authentication functions
 function checkUserAuthentication() {
     const userData = localStorage.getItem('user');
     if (userData) {
@@ -1226,14 +956,12 @@ function checkUserAuthentication() {
 function updateNavigationForLoggedInUser() {
     const navMenu = document.getElementById('nav-menu');
     if (navMenu && currentUser) {
-        // Remove sign in/sign up links
         const signInLink = navMenu.querySelector('a[href="signin.html"]');
         const signUpLink = navMenu.querySelector('a[href="signup.html"]');
         
         if (signInLink) signInLink.parentElement.remove();
         if (signUpLink) signUpLink.parentElement.remove();
         
-        // Add user menu
         const userMenuItem = document.createElement('li');
         userMenuItem.className = 'nav-item';
         userMenuItem.innerHTML = `
@@ -1271,10 +999,8 @@ function showUserFavorites() {
     alert('Favorites feature coming soon! This will show your saved destinations and wishlist.');
 }
 
-// Service Worker registration for PWA capabilities (optional)
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
-        // Uncomment to enable service worker
         // navigator.serviceWorker.register('/sw.js');
     });
 }

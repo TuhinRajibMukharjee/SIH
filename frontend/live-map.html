@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Live Map</title>
+	<link
+		rel="stylesheet"
+		href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+		integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+		crossorigin=""
+	/>
+	<style>
+		html, body, #map {
+			height: 100%;
+			width: 100%;
+			margin: 0;
+		}
+		.controls {
+			position: absolute;
+			top: 10px;
+			left: 10px;
+			z-index: 1000;
+			background: rgba(255, 255, 255, 0.9);
+			padding: 8px 10px;
+			border-radius: 6px;
+			box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+			font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+		}
+		.controls button {
+			cursor: pointer;
+			padding: 6px 10px;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			background: #fff;
+		}
+	</style>
+</head>
+<body>
+	<div id="map"></div>
+	<div class="controls">
+		<button id="locateBtn" title="Center on my location">📍 Locate me</button>
+	</div>
+
+	<script
+		src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+		integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+		crossorigin=""
+	></script>
+	<script>
+		// Initialize map
+		const map = L.map('map', { zoomControl: true });
+		// Center roughly on Jharkhand, India
+		map.setView([23.60, 85.30], 7);
+
+		// Add OpenStreetMap tiles
+		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+			maxZoom: 19,
+			attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors'
+		}).addTo(map);
+
+		// Hotspots layer (Jharkhand)
+		const hotspotLayer = L.layerGroup().addTo(map);
+
+		function hotspotMarker(feature, latlng) {
+			const props = feature && feature.properties ? feature.properties : {};
+			const name = props.name || 'Hotspot';
+			const category = props.category || props.type || 'Unknown';
+			const popupHtml = `<strong>${name}</strong><br/>Category: ${category}`;
+			return L.circleMarker(latlng, {
+				radius: 6,
+				color: '#D90429',
+				fillColor: '#EF233C',
+				fillOpacity: 0.8,
+				weight: 1
+			}).bindPopup(popupHtml);
+		}
+
+		async function loadJharkhandHotspots() {
+			try {
+				// Place a GeoJSON file named 'jharkhand-hotspots.geojson' in the same folder
+				const res = await fetch('jharkhand-hotspots.geojson', { cache: 'no-store' });
+				if (!res.ok) throw new Error('No hotspots file found');
+				const geojson = await res.json();
+				const layer = L.geoJSON(geojson, { pointToLayer: hotspotMarker });
+				layer.addTo(hotspotLayer);
+				try {
+					map.fitBounds(layer.getBounds(), { padding: [20, 20] });
+				} catch (_) {}
+			} catch (err) {
+				console.warn('Hotspots not loaded:', err && err.message ? err.message : err);
+			}
+		}
+
+		loadJharkhandHotspots();
+
+		// Live geolocation (optional)
+		let userMarker = null;
+		let accuracyCircle = null;
+		let watchId = null;
+
+		function updateUserLocation(position) {
+			const lat = position.coords.latitude;
+			const lng = position.coords.longitude;
+			const acc = position.coords.accuracy || 0;
+
+			if (!userMarker) {
+				userMarker = L.marker([lat, lng], { title: 'You are here' }).addTo(map);
+			} else {
+				userMarker.setLatLng([lat, lng]);
+			}
+
+			if (!accuracyCircle) {
+				accuracyCircle = L.circle([lat, lng], { radius: acc, color: '#1368CE', fillColor: '#3A86FF', fillOpacity: 0.2 }).addTo(map);
+			} else {
+				accuracyCircle.setLatLng([lat, lng]);
+				accuracyCircle.setRadius(acc);
+			}
+		}
+
+		function handleGeoError(err) {
+			console.warn('Geolocation error:', err && err.message ? err.message : err);
+		}
+
+		function startTracking(centerOnFirstFix = true) {
+			if (!('geolocation' in navigator)) {
+				alert('Geolocation is not supported by your browser.');
+				return;
+			}
+			if (watchId !== null) return; // Already tracking
+
+			let firstFix = true;
+			watchId = navigator.geolocation.watchPosition(
+				pos => {
+					updateUserLocation(pos);
+					if (centerOnFirstFix && firstFix) {
+						map.setView([pos.coords.latitude, pos.coords.longitude], 15, { animate: true });
+						firstFix = false;
+					}
+				},
+				handleGeoError,
+				{ enableHighAccuracy: true, maximumAge: 5000, timeout: 20000 }
+			);
+		}
+
+		// Button: center on user and start tracking
+		document.getElementById('locateBtn').addEventListener('click', () => {
+			startTracking(true);
+		});
+
+		// Note: For geolocation to work reliably, open this file via a local server (http://)
+		// or deploy it (https://). Opening as a file:// may restrict geolocation in some browsers.
+	</script>
+</body>
+</html>

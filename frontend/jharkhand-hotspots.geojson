@@ -1,0 +1,47 @@
+{
+	"type": "FeatureCollection",
+	"features": [
+		{ "type": "Feature", "properties": { "name": "Ranchi", "category": "City" }, "geometry": { "type": "Point", "coordinates": [85.324, 23.344] } },
+		{ "type": "Feature", "properties": { "name": "Jamshedpur", "category": "City" }, "geometry": { "type": "Point", "coordinates": [86.2029, 22.8046] } },
+		{ "type": "Feature", "properties": { "name": "Dhanbad", "category": "City" }, "geometry": { "type": "Point", "coordinates": [86.4432, 23.7957] } },
+		{ "type": "Feature", "properties": { "name": "Bokaro Steel City", "category": "City" }, "geometry": { "type": "Point", "coordinates": [86.1511, 23.6693] } },
+
+		{ "type": "Feature", "properties": { "name": "Dassam Falls", "category": "Waterfall" }, "geometry": { "type": "Point", "coordinates": [85.515, 22.557] } },
+		{ "type": "Feature", "properties": { "name": "Hundru Falls", "category": "Waterfall" }, "geometry": { "type": "Point", "coordinates": [85.462, 23.285] } },
+		{ "type": "Feature", "properties": { "name": "Jonha Falls", "category": "Waterfall" }, "geometry": { "type": "Point", "coordinates": [85.508, 23.412] } },
+		{ "type": "Feature", "properties": { "name": "Panchghagh Falls", "category": "Waterfall" }, "geometry": { "type": "Point", "coordinates": [85.274, 22.971] } },
+		{ "type": "Feature", "properties": { "name": "Hirni Falls", "category": "Waterfall" }, "geometry": { "type": "Point", "coordinates": [85.114, 22.505] } },
+		{ "type": "Feature", "properties": { "name": "Lodh (Budha Ghagh) Falls", "category": "Waterfall" }, "geometry": { "type": "Point", "coordinates": [84.365, 23.517] } },
+		{ "type": "Feature", "properties": { "name": "Sita Falls", "category": "Waterfall" }, "geometry": { "type": "Point", "coordinates": [85.405, 23.160] } },
+
+		{ "type": "Feature", "properties": { "name": "Betla National Park", "category": "National Park" }, "geometry": { "type": "Point", "coordinates": [84.197, 23.847] } },
+		{ "type": "Feature", "properties": { "name": "Palamu Fort", "category": "Historical" }, "geometry": { "type": "Point", "coordinates": [84.103, 23.914] } },
+		{ "type": "Feature", "properties": { "name": "Hazaribagh Wildlife Sanctuary", "category": "Wildlife" }, "geometry": { "type": "Point", "coordinates": [85.370, 24.030] } },
+		{ "type": "Feature", "properties": { "name": "Canary Hills, Hazaribagh", "category": "Viewpoint" }, "geometry": { "type": "Point", "coordinates": [85.369, 24.004] } },
+
+		{ "type": "Feature", "properties": { "name": "Netarhat", "category": "Hill Station" }, "geometry": { "type": "Point", "coordinates": [84.270, 23.469] } },
+		{ "type": "Feature", "properties": { "name": "Patratu Valley", "category": "Viewpoint" }, "geometry": { "type": "Point", "coordinates": [85.279, 23.664] } },
+		{ "type": "Feature", "properties": { "name": "Patratu Lake & Dam", "category": "Lake" }, "geometry": { "type": "Point", "coordinates": [85.282, 23.651] } },
+
+		{ "type": "Feature", "properties": { "name": "Baidyanath Jyotirlinga, Deoghar", "category": "Temple" }, "geometry": { "type": "Point", "coordinates": [86.694, 24.476] } },
+		{ "type": "Feature", "properties": { "name": "Parasnath (Shikharji)", "category": "Pilgrimage" }, "geometry": { "type": "Point", "coordinates": [86.146, 23.998] } },
+		{ "type": "Feature", "properties": { "name": "Rajrappa Temple (Chhinnamasta)", "category": "Temple" }, "geometry": { "type": "Point", "coordinates": [85.875, 23.626] } },
+		{ "type": "Feature", "properties": { "name": "Itkhori Temple (Bhadrakali)", "category": "Temple" }, "geometry": { "type": "Point", "coordinates": [85.309, 24.058] } },
+
+		{ "type": "Feature", "properties": { "name": "Dalma Wildlife Sanctuary", "category": "Wildlife" }, "geometry": { "type": "Point", "coordinates": [86.098, 22.930] } },
+		{ "type": "Feature", "properties": { "name": "Dimna Lake", "category": "Lake" }, "geometry": { "type": "Point", "coordinates": [86.285, 22.853] } },
+		{ "type": "Feature", "properties": { "name": "Jubilee Park, Jamshedpur", "category": "Park" }, "geometry": { "type": "Point", "coordinates": [86.203, 22.804] } },
+		{ "type": "Feature", "properties": { "name": "Tata Steel Zoological Park", "category": "Zoo" }, "geometry": { "type": "Point", "coordinates": [86.206, 22.804] } },
+
+		{ "type": "Feature", "properties": { "name": "Pahari Mandir, Ranchi", "category": "Temple" }, "geometry": { "type": "Point", "coordinates": [85.323, 23.358] } },
+		{ "type": "Feature", "properties": { "name": "Rock Garden, Ranchi", "category": "Viewpoint" }, "geometry": { "type": "Point", "coordinates": [85.291, 23.391] } },
+		{ "type": "Feature", "properties": { "name": "Tagore Hill, Ranchi", "category": "Monument" }, "geometry": { "type": "Point", "coordinates": [85.319, 23.382] } },
+		{ "type": "Feature", "properties": { "name": "Birsa Zoological Park, Ranchi", "category": "Zoo" }, "geometry": { "type": "Point", "coordinates": [85.281, 23.314] } },
+
+		{ "type": "Feature", "properties": { "name": "Usri Falls, Giridih", "category": "Waterfall" }, "geometry": { "type": "Point", "coordinates": [86.305, 24.144] } },
+		{ "type": "Feature", "properties": { "name": "Topchanchi Lake", "category": "Lake" }, "geometry": { "type": "Point", "coordinates": [86.198, 23.902] } },
+		{ "type": "Feature", "properties": { "name": "Maithon Dam", "category": "Dam" }, "geometry": { "type": "Point", "coordinates": [86.805, 23.790] } },
+		{ "type": "Feature", "properties": { "name": "Tenughat Dam", "category": "Dam" }, "geometry": { "type": "Point", "coordinates": [85.930, 23.780] } },
+		{ "type": "Feature", "properties": { "name": "Tilaiya Dam", "category": "Dam" }, "geometry": { "type": "Point", "coordinates": [85.383, 24.416] } }
+	]
+}

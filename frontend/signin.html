@@ -377,7 +377,7 @@
     <script src="api.js"></script>
     <script src="script.js"></script>
     <script>
-        // Sign-in specific functionality
+        // Sign-in specific functionality (backend)
         document.addEventListener('DOMContentLoaded', function() {
             setupSignInForm();
         });
@@ -394,15 +394,31 @@
                     password: formData.get('password')
                 };
                 
+                const signinBtn = document.getElementById('signin-btn');
+                const originalText = signinBtn.textContent;
+                signinBtn.textContent = 'Signing in...';
+                signinBtn.disabled = true;
+                
                 try {
                     const response = await loginUser(credentials);
                     if (response) {
                         window.location.href = 'index.html';
                     }
                 } catch (error) {
-                    console.error('Login failed:', error);
+                    showError(error.message || 'Login failed');
+                } finally {
+                    signinBtn.textContent = originalText;
+                    signinBtn.disabled = false;
                 }
             });
+        }
+        
+        function showError(message) {
+            const errorDiv = document.getElementById('error-message');
+            const successDiv = document.getElementById('success-message');
+            successDiv.style.display = 'none';
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
         }
     </script>
 </body>

@@ -12,10 +12,17 @@ const { body, validationResult } = require('express-validator');
 const compression = require('compression');
 const morgan = require('morgan');
 const path = require('path');
-require('dotenv').config();
+const fs = require('fs');
+require('dotenv').config({ path: path.join(__dirname, 'config.env') });
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Ensure uploads directory exists
+const uploadsDir = path.join(__dirname, 'uploads');
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+}
 
 // Security middleware
 app.use(helmet());
@@ -31,7 +38,7 @@ app.use(limiter);
 
 // CORS configuration
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+  origin: process.env.FRONTEND_URL || '*',
   credentials: true
 }));
 
@@ -39,9 +46,10 @@ app.use(cors({
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// Static files
-app.use(express.static('.'));
-app.use('/uploads', express.static('uploads'));
+// Static files - serve from frontend directory
+const frontendDir = path.join(__dirname, '../frontend');
+app.use(express.static(frontendDir));
+app.use('/uploads', express.static(uploadsDir));
 
 // Database initialization
 const db = new sqlite3.Database('jharkhand_tourism.db');
@@ -195,7 +203,7 @@ const requireAdmin = (req, res, next) => {
 // File upload configuration
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/');
+    cb(null, uploadsDir);
   },
   filename: (req, file, cb) => {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
@@ -638,7 +646,7 @@ app.post('/api/track-page-view', (req, res) => {
 
 // Serve the main HTML file
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(frontendDir, 'index.html'));
 });
 
 // Error handling middleware
